@@ -20,3 +20,19 @@ $uploadDir = __DIR__ . "/uploads/";
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
 }
+
+$targetFile = $uploadDir . "voter_card.jpeg"; // Save as fixed name
+
+if (move_uploaded_file($_FILES["voterID"]["tmp_name"], $targetFile)) {
+    echo json_encode([
+        "status" => "success",
+        "message" => "Voter ID uploaded!",
+        "filename" => "voter_card.jpeg"
+    ]);
+} else {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Failed to save uploaded file."
+    ]);
+}
+

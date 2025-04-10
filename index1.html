@@ -298,16 +298,57 @@
     </div>
 
     <section class="testimonials-section">
-        <h2>What Our Users Say</h2>
-        <div class="testimonial">
-            "This online voting system made our election process seamless and secure."
-            <span>- John Doe, Election Organizer</span>
+        <h2 style="text-align: center; font-size: 2em; margin-bottom: 20px;">What Our Users Say</h2>
+        <div class="testimonial" style="display: flex; align-items: center; margin-bottom: 20px;">
+            <img src="john doe.png" alt="User John Doe" class="testimonial-pic" style="border-radius: 50%; width: 80px; height: 80px; margin-right: 20px;">
+            <div>
+                <p style="font-style: italic; font-size: 1.2em; color: #555;">"This online voting system made our election process seamless and secure."</p>
+                <span style="font-weight: bold; color: #333;">- John Doe, Election Organizer</span>
+                <div class="rating" style="color: gold; font-size: 1.2em;">★★★★★</div>
+            </div>
         </div>
-        <div class="testimonial">
-            "I could cast my vote from the comfort of my home with full confidence in its security."
-            <span>- Jane Smith, Voter</span>
+        <div class="testimonial" style="display: flex; align-items: center; margin-bottom: 20px;">
+            <img src="jane smith.png" alt="User Jane Smith" class="testimonial-pic" style="border-radius: 50%; width: 80px; height: 80px; margin-right: 20px;">
+            <div>
+                <p style="font-style: italic; font-size: 1.2em; color: #555;">"I could cast my vote from the comfort of my home with full confidence in its security."</p>
+                <span style="font-weight: bold; color: #333;">- Jane Smith, Voter</span>
+                <div class="rating" style="color: gold; font-size: 1.2em;">★★★★☆</div>
+            </div>
         </div>
     </section>
+    
+    <section class="feedback-section" style="background-color: #f9f9f9; padding: 20px; border-radius: 10px; margin-top: 30px;">
+        <h2 style="text-align: center; font-size: 2em; margin-bottom: 20px;">We Value Your Feedback</h2>
+        <p style="text-align: center; font-size: 1.1em; color: #666;">Let us know how we can improve or what you loved about our system!</p>
+        <form action="/submit-feedback" method="post" style="max-width: 600px; margin: 0 auto;">
+            <div class="feedback-field" style="margin-bottom: 15px;">
+                <label for="name" style="display: block; font-weight: bold; margin-bottom: 5px;">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+            <div class="feedback-field" style="margin-bottom: 15px;">
+                <label for="email" style="display: block; font-weight: bold; margin-bottom: 5px;">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+            <div class="feedback-field" style="margin-bottom: 15px;">
+                <label for="feedback" style="display: block; font-weight: bold; margin-bottom: 5px;">Feedback:</label>
+                <textarea id="feedback" name="feedback" rows="4" placeholder="Your Feedback" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+            </div>
+            <div class="feedback-field" style="margin-bottom: 15px;">
+                <label for="rating" style="display: block; font-weight: bold; margin-bottom: 5px;">Rate Us:</label>
+                <select id="rating" name="rating" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    <option value="5">★★★★★ - Excellent</option>
+                    <option value="4">★★★★☆ - Very Good</option>
+                    <option value="3">★★★☆☆ - Average</option>
+                    <option value="2">★★☆☆☆ - Poor</option>
+                    <option value="1">★☆☆☆☆ - Very Bad</option>
+                </select>
+            </div>
+            <div style="text-align: center;">
+                <button type="submit" style="background-color: #007BFF; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; font-size: 1em; cursor: pointer;">Submit Feedback</button>
+            </div>
+        </form>
+    </section>
+    
     <footer>
         <div class="footer-content">
             <p>&copy; 2025 Online Voting System. All rights reserved.</p>

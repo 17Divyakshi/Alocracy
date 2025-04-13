@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <title>Face Authentication</title>
+   <link rel="stylesheet" href="style.css" />
+   <style>
+     body {
+       font-family: Arial, sans-serif;
+       background: linear-gradient(to right, #89f7fe, #66a6ff);
+       padding: 20px;
+       text-align: center;
+     }
+ 
+     h2 {
+       color: #333;
+     }
+ 
+     input[type="file"],
+     button {
+       margin: 10px;
+       padding: 10px 15px;
+       border: none;
+       border-radius: 8px;
+       font-size: 16px;
+       cursor: pointer;
+     }
+ 
+     button {
+       background-color: #007bff;
+       color: white;
+     }
+ 
+     button:hover {
+       background-color: #0056b3;
+     }
+ 
+     #proceedBtn {
+       background-color: #28a745;
+       display: none;
+     }
+ 
+     #proceedBtn:hover {
+       background-color: #218838;
+     }
+ 
+     video {
+       border-radius: 8px;
+       margin-top: 15px;
+     }
+ 
+     p {
+       font-weight: bold;
+     }
+   </style>
+ </head>
+ <body>
+   <h2>Upload Voter ID</h2>
+   <input type="file" id="voterIDUpload" />
+   <button id="uploadBtn">Upload</button>
+   <p id="uploadStatus"></p>
+ 
+   <h2>Live Camera</h2>
+   <video id="video" width="640" height="480" autoplay></video>
+   <button id="authBtn">Authenticate</button>
+   <p id="auth-status"></p>
+ 
+   <button id="proceedBtn">Proceed to Voting</button>
+ 
+   <script src="script.js"></script>
+ </body>
+ </html>
+ 

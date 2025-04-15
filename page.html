@@ -38,7 +38,7 @@
         .container {
             display: flex;
             gap: 30px;
-            position: relative;
+            position: relative;                                                                                                                                                                                                             
         }
         .card {
             width: 220px;
@@ -154,6 +154,32 @@
             dots.forEach(dot => dot.classList.remove('active'));
             dots[index].classList.add('active');
         }
+        function speak(text) {
+      const msg = new SpeechSynthesisUtterance();
+      msg.text = text;
+      window.speechSynthesis.speak(msg);
+    }
+
+    function voteNow() {
+      speak("Redirecting to Vote Now page");
+      alert("Redirecting to Vote Now page");
+    }
+
+    function openDashboard() {
+      speak("Opening Dashboard");
+      alert("Opening Dashboard");
+    }
+
+    function openAIBot() {
+      speak("Launching AI Bot");
+      alert("Launching AI Bot");
+    }
+
+    function changeSlide(index) {
+      let dots = document.querySelectorAll('.dot');
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[index].classList.add('active');
+    }
     </script>
 </body>
 </html>

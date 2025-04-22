@@ -2,80 +2,191 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Voting System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Online Voting System - Alocracy</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
     <style>
-        /* General Styles */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: #f3f4f9;
-            color: #333;
+            background: #0a0a0f;
+            color: #cfd9ff;
             overflow-x: hidden;
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        header {
-            background: linear-gradient(90deg, #1c3757e6, #6f858bea, #1c3757e6);
-            color: rgb(39, 36, 36);
-            text-align: center;
-            padding: 20px 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        a {
+            text-decoration: none;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 3rem;
-            font-family: 'Montserrat', sans-serif;
+        .navbar {
+            background: linear-gradient(90deg, #0f0c29, #302b63, #24243e);
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        header h4 {
-            margin: 0;
-            font-size: 1.2rem;
+        .nav-container {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .logo-area {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 40px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #a66cff;
+            font-family: 'Roboto', sans-serif;
+            user-select: none;
+        }
+
+        .slogan {
+            font-size: 1rem;
             font-weight: 400;
+            color: #9ee2ff;
+            margin-top: 4px;
+            user-select: none;
         }
 
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            font-size: 1rem;
+            color: #cfd9ff;
+            transition: color 0.3s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        .nav-links li a::after {
+            content: "";
+            display: block;
+            width: 0%;
+            height: 2px;
+            background: #00ffff;
+            transition: width 0.3s ease;
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .nav-links li a:hover {
+            color: #00ffff;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .light-mode-toggle {
+            background: none;
+            border: none;
+            color: #cfd9ff;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0;
+            transition: color 0.3s ease;
+            user-select: none;
+            margin-left: 20px;
+        }
+
+        .light-mode-toggle:hover {
+            color: #00ffff;
+        }
+
+        /* Hero Section */
         .hero-section {
             text-align: center;
-            padding: 50px 20px;
-            color: white;
-            background: #34495ef0;
+            padding: 100px 20px 50px;
+            color: #ffffff;
+            background: #1a1a2e;
             background-image: url('image.png');
             background-size: cover;
             background-blend-mode: multiply;
             min-height: 50vh;
+            margin-top: 90px;
+            user-select: none;
+        }
+
+        .hero-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
         }
 
         .hero-section .cta-btn {
             padding: 15px 30px;
             font-size: 1.2rem;
-            color: #fff;
-            background: #ff9800;
+            color: #0a0a0a;
+            background: #00ffff;
             border: none;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 255, 255, 0.4);
             cursor: pointer;
             transition: background 0.3s ease, transform 0.3s ease;
+            user-select: none;
         }
 
         .hero-section .cta-btn:hover {
-            background: #fbbd5f;
+            background: #00b8b8;
             transform: translateY(-2px);
         }
 
         .features-section {
             padding: 50px 20px;
             text-align: center;
-            background: #ffffff;
+            background: #111827;
         }
 
         .features-section h2 {
             font-size: 2.5rem;
             margin-bottom: 30px;
-            color: #34495e;
+            color: #00ffff;
+            user-select: none;
         }
 
         .features {
@@ -87,11 +198,14 @@
 
         .feature-box {
             width: 300px;
-            background: white;
+            background: #1a1a2e;
+            color: #e0e8ff;
+            box-shadow: 0 4px 10px rgba(166, 108, 255, 0.3);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            user-select: none;
         }
 
         .feature-box:hover {
@@ -101,7 +215,7 @@
 
         .feature-box h3 {
             margin-bottom: 10px;
-            color: #2c3e50;
+            color: #a66cff;
         }
 
         .feature-box p {
@@ -111,9 +225,10 @@
         .feature-box .icon {
             font-size: 2rem;
             margin-bottom: 10px;
-            color: #2c3e50;
+            color: #00ffff;
         }
 
+        /* Slider Section */
         .slider-container {
             width: 100%;
             height: 350px;
@@ -123,6 +238,8 @@
             overflow: hidden;
             perspective: 1200px;
             margin-top: 20px;
+            background: linear-gradient(180deg, #1a1a2e, #0a0a0f);
+            color: #fff;
         }
 
         .slider {
@@ -136,18 +253,10 @@
             height: 250px;
             margin: 0 15px;
             border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(166, 108, 255, 0.2);
             transition: transform 0.5s, box-shadow 0.5s;
         }
 
-        .slider-container {
-        background: linear-gradient(180deg, #e3f2fd, #ffffff);
-        color: white;
-        padding: 20px 0;
-        }
-
-
-        /* Curved 3D Effect Initially */
         .slider img:nth-child(1) {
             transform: rotateY(-40deg) translateZ(-180px);
         }
@@ -168,13 +277,11 @@
             transform: rotateY(40deg) translateZ(-180px);
         }
 
-        /* Hover Effect */
         .slider img:hover {
             transform: scale(1.1) translateY(-20px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 40px rgba(166, 108, 255, 0.4);
         }
 
-        /* Spread and Return Animation */
         @keyframes spread-and-return {
             0% {
                 transform: rotateY(0deg);
@@ -189,28 +296,47 @@
             }
         }
 
-        /* Smooth Animation Pause on Hover */
         .slider-container:hover .slider {
             animation-play-state: paused;
         }
 
+        /* Testimonials Section */
         .testimonials-section {
             padding: 50px 20px;
             text-align: center;
-            background: linear-gradient(180deg, #e1f3ff, #ffffff);
+            background: linear-gradient(180deg, #1a1a2e, #0a0a0f);
+            user-select: none;
         }
 
         .testimonials-section h2 {
             font-size: 2.5rem;
             margin-bottom: 30px;
-            color: #34495e;
+            color: #00ffff;
         }
 
         .testimonial {
+            display: flex;
+            align-items: center;
             margin: 20px auto;
             max-width: 600px;
+            padding: 20px;
+            background: #111;
+            border-radius: 10px;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 10px #00ffff;
+        }
+
+        .testimonial-pic {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin-right: 20px;
+        }
+
+        .testimonial p {
             font-style: italic;
-            color: #555;
+            font-size: 1.2em;
+            color: #cfd9ff;
         }
 
         .testimonial span {
@@ -218,14 +344,121 @@
             margin-top: 10px;
             font-size: 1.1rem;
             font-weight: bold;
-            color: #34495e;
+            color: #ffa93f;
+        }
+
+        .rating {
+            color: gold;
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            background-color: #1a1a2e;
+            padding: 30px 20px;
+            border-radius: 10px;
+            margin: 40px auto 40px auto;
+            max-width: 600px;
+            color: #cfd9ff;
+            position: relative;
+        }
+
+        .feedback-section h2 {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #00ffff;
+        }
+
+        .feedback-section p {
+            text-align: center;
+            font-size: 1.1em;
+            color: #a0bfff;
+            margin-bottom: 30px;
+        }
+
+        .feedback-field {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .feedback-section label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: block;
+            color: #a66cff;
+        }
+
+        .feedback-section input[type="text"],
+        .feedback-section input[type="email"],
+        .feedback-section textarea,
+        .feedback-section select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #0a0a0f;
+            color: #cfd9ff;
+            font-size: 1rem;
+            box-sizing: border-box;
+            text-align: left;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feedback-section input[type="text"]:focus,
+        .feedback-section input[type="email"]:focus,
+        .feedback-section textarea:focus,
+        .feedback-section select:focus {
+            border-color: #00ffff;
+            box-shadow: 0 0 8px #00ffff;
+            outline: none;
+            background-color: #121224;
+        }
+
+        .feedback-section button[type="submit"] {
+            background-color: #00ffff;
+            color: #0a0a0a;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            user-select: none;
+            box-shadow: 0 0 12px #00ffffaa;
+        }
+
+        .feedback-section button[type="submit"]:hover {
+            background-color: #00b8b8;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px #00b8b8cc;
+        }
+
+        .feedback-field .alert {
+            color: #ff1744;
+            text-shadow: 0 0 6px #ff1744, 0 0 16px #ff1744;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            display: none;
+            font-weight: 600;
+        }
+
+        body.light-mode .feedback-field .alert {
+            color: #e53935;
+            text-shadow: 0 0 6px #ffbdbd;
         }
 
         footer {
-            background: #34495e;
-            color: white;
+            background: #1a1a2e;
+            color: #ffffff;
             text-align: center;
             padding: 30px 20px;
+            margin-top: 20px;
+            user-select: none;
         }
 
         footer .social-icons {
@@ -234,135 +467,201 @@
 
         footer .social-icons a {
             margin: 0 10px;
-            color: white;
+            color: #cfd9ff;
             font-size: 1.5rem;
             transition: color 0.3s ease;
         }
 
         footer .social-icons a:hover {
-            color: #ff9800;
+            color: #00ffff;
         }
 
-        footer .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
+        body.light-mode footer {
+            background: #e9ecef;
+            color: #333;
         }
 
-        footer p {
-            margin: 5px 0;
+        body.light-mode footer .social-icons a {
+            color: #555;
+        }
+
+        body.light-mode footer .social-icons a:hover {
+            color: #00b8b8;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>Alocracy</h1>
-        <h4>~Where AI Meets Democracy</h4>
-    </header>
+    <nav class="navbar" role="navigation" aria-label="Primary Navigation">
+        <div class="nav-container">
+            <div class="logo-area">
+                <div class="logo">Alocracy</div>
+                <h4 class="slogan">~Where AI Meets Democracy</h4>
+            </div>
 
-    <section class="hero-section">
+            <ul class="nav-links" role="menubar">
+                <li role="none"><a href="#home" role="menuitem" tabindex="0">Home</a></li>
+                <li role="none"><a href="#features" role="menuitem" tabindex="0">Features</a></li>
+                <li role="none"><a href="#testimonials" role="menuitem" tabindex="0">Testimonials</a></li>
+                <li role="none"><a href="#contact" role="menuitem" tabindex="0">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero-section" id="home">
         <h2>Empowering Democracy, One Vote at a Time</h2>
         <p>Secure, Transparent, and Accessible Online Voting Solution.</p>
-        <button class="cta-btn">Get Started</button>
+        <button class="cta-btn" type="button">Get Started</button>
     </section>
 
-    <section class="features-section">
+    <section class="features-section" id="features">
         <h2>Why Choose Our System?</h2>
         <div class="features">
             <div class="feature-box">
-                <i class="fas fa-lock icon"></i>
+                <i class="fas fa-lock icon" aria-hidden="true"></i>
                 <h3>Secure</h3>
                 <p>Industry-leading encryption ensures your vote remains private and tamper-proof.</p>
             </div>
             <div class="feature-box">
-                <i class="fas fa-eye icon"></i>
+                <i class="fas fa-eye icon" aria-hidden="true"></i>
                 <h3>Transparent</h3>
                 <p>Real-time tracking for election results with full transparency.</p>
             </div>
             <div class="feature-box">
-                <i class="fas fa-universal-access icon"></i>
+                <i class="fas fa-universal-access icon" aria-hidden="true"></i>
                 <h3>Accessible</h3>
                 <p>Easy-to-use interface that works on any device, anytime, anywhere.</p>
             </div>
         </div>
     </section>
 
-    <div class="slider-container">
+    <div class="slider-container" aria-label="Image slider">
         <div class="slider">
-            <img src="img3.png" alt="Image 1">
-            <img src="https://source.unsplash.com/200x300/?technology,turntable" alt="Image 2">
-            <img src="img1.png" alt="Image 3">
-            <img src="https://source.unsplash.com/200x300/?architecture,building" alt="Image 4">
-            <img src="img2.png" alt="Image 5">
+            <img src="https://media.licdn.com/dms/image/v2/D5622AQG7l7k6gz_9gg/feedshare-shrink_800/feedshare-shrink_800/0/1713514345890?e=2147483647&v=beta&t=em4Q75SxASPvnTOVGk7F4b-83-kjqPp7UGL8xzmyZBE" alt="Image 1" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6-DJSKfkueXcl3FPHzY9ct356VjC3P3UT5Q&s" alt="Image 2" />
+            <img src="img3.png" alt="Image 3" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_2exliPZgDumuWSOMdjG9jmTVQHfVuVeIz4-9bYqiXNqORyhzNt1m8nKY-W4Xpeg_xCE&usqp=CAU" alt="Image 4" />
+            <img src="https://t3.ftcdn.net/jpg/02/55/36/74/360_F_255367453_h4QrW8WqQE1VV4bI8tp1qP8ZoPIvEMCl.jpg" alt="Image 5" />
         </div>
     </div>
 
-    <section class="testimonials-section">
-        <h2 style="text-align: center; font-size: 2em; margin-bottom: 20px;">What Our Users Say</h2>
-        <div class="testimonial" style="display: flex; align-items: center; margin-bottom: 20px;">
-            <img src="john doe.png" alt="User John Doe" class="testimonial-pic" style="border-radius: 50%; width: 80px; height: 80px; margin-right: 20px;">
+    <section class="testimonials-section" id="testimonials">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial" role="article" aria-label="Testimonial from John Doe">
+            <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="John Doe" class="testimonial-pic" />
             <div>
-                <p style="font-style: italic; font-size: 1.2em; color: #555;">"This online voting system made our election process seamless and secure."</p>
-                <span style="font-weight: bold; color: #333;">- John Doe, Election Organizer</span>
-                <div class="rating" style="color: gold; font-size: 1.2em;">★★★★★</div>
+                <p>"This online voting system made our election process seamless and secure."</p>
+                <span>- John Doe, Election Organizer</span>
+                <div class="rating" aria-label="Rating: 5 stars">★★★★★</div>
             </div>
         </div>
-        <div class="testimonial" style="display: flex; align-items: center; margin-bottom: 20px;">
-            <img src="jane smith.png" alt="User Jane Smith" class="testimonial-pic" style="border-radius: 50%; width: 80px; height: 80px; margin-right: 20px;">
+        <div class="testimonial" role="article" aria-label="Testimonial from Jane Smith">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Jane Smith" class="testimonial-pic" />
             <div>
-                <p style="font-style: italic; font-size: 1.2em; color: #555;">"I could cast my vote from the comfort of my home with full confidence in its security."</p>
-                <span style="font-weight: bold; color: #333;">- Jane Smith, Voter</span>
-                <div class="rating" style="color: gold; font-size: 1.2em;">★★★★☆</div>
+                <p>"I could cast my vote from the comfort of my home with full confidence in its security."</p>
+                <span>- Jane Smith, Voter</span>
+                <div class="rating" aria-label="Rating: 4 stars">★★★★☆</div>
             </div>
         </div>
     </section>
-    
-    <section class="feedback-section" style="background-color: #f9f9f9; padding: 20px; border-radius: 10px; margin-top: 30px;">
-        <h2 style="text-align: center; font-size: 2em; margin-bottom: 20px;">We Value Your Feedback</h2>
-        <p style="text-align: center; font-size: 1.1em; color: #666;">Let us know how we can improve or what you loved about our system!</p>
-        <form action="/submit-feedback" method="post" style="max-width: 600px; margin: 0 auto;">
-            <div class="feedback-field" style="margin-bottom: 15px;">
-                <label for="name" style="display: block; font-weight: bold; margin-bottom: 5px;">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+
+    <section class="feedback-section" id="contact" aria-labelledby="feedback-heading">
+        <h2 id="feedback-heading">We Value Your Feedback</h2>
+        <p>Let us know how we can improve or what you loved about our system!</p>
+        <form id="feedbackForm" action="/submit-feedback" method="post" novalidate>
+            <div class="feedback-field">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" aria-describedby="name-error" required />
+                <div class="alert" id="name-error" role="alert">Please fill in your name.</div>
             </div>
-            <div class="feedback-field" style="margin-bottom: 15px;">
-                <label for="email" style="display: block; font-weight: bold; margin-bottom: 5px;">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Your Email" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            <div class="feedback-field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" aria-describedby="email-error" required />
+                <div class="alert" id="email-error" role="alert">Please fill in your email.</div>
             </div>
-            <div class="feedback-field" style="margin-bottom: 15px;">
-                <label for="feedback" style="display: block; font-weight: bold; margin-bottom: 5px;">Feedback:</label>
-                <textarea id="feedback" name="feedback" rows="4" placeholder="Your Feedback" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+            <div class="feedback-field">
+                <label for="feedback">Feedback:</label>
+                <textarea id="feedback" name="feedback" rows="4" placeholder="Your Feedback" aria-describedby="feedback-error" required></textarea>
+                <div class="alert" id="feedback-error" role="alert">Please fill in your feedback.</div>
             </div>
-            <div class="feedback-field" style="margin-bottom: 15px;">
-                <label for="rating" style="display: block; font-weight: bold; margin-bottom: 5px;">Rate Us:</label>
-                <select id="rating" name="rating" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            <div class="feedback-field">
+                <label for="rating">Rate Us:</label>
+                <select id="rating" name="rating" aria-describedby="rating-error" required>
+                    <option value="">Select</option>
                     <option value="5">★★★★★ - Excellent</option>
                     <option value="4">★★★★☆ - Very Good</option>
                     <option value="3">★★★☆☆ - Average</option>
                     <option value="2">★★☆☆☆ - Poor</option>
                     <option value="1">★☆☆☆☆ - Very Bad</option>
                 </select>
+                <div class="alert" id="rating-error" role="alert">Please select a rating.</div>
             </div>
             <div style="text-align: center;">
-                <button type="submit" style="background-color: #007BFF; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; font-size: 1em; cursor: pointer;">Submit Feedback</button>
+                <button type="submit">Submit Feedback</button>
             </div>
         </form>
     </section>
-    
+
     <footer>
         <div class="footer-content">
             <p>&copy; 2025 Online Voting System. All rights reserved.</p>
-            <p>Alocracy is an AI-powered online voting platform designed to ensure security, transparency, and accessibility for all users. Our advanced encryption technology and real-time tracking make the voting process seamless and trustworthy. With Alocracy, every vote counts, and every voice is heard.</p>
+            <p>Alocracy is an AI-powered online voting platform designed to ensure security, transparency, and
+                accessibility for all users. Our advanced encryption technology and real-time tracking make the voting
+                process seamless and trustworthy. With Alocracy, every vote counts, and every voice is heard.</p>
             <p>Follow us on:</p>
-            <div class="social-icons">
-                <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <div class="social-icons" role="list">
+                <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" role="listitem"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" role="listitem"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" role="listitem"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn" role="listitem"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
     </footer>
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <script>
+
+        const form = document.getElementById('feedbackForm');
+        form.addEventListener('submit', function (event) {
+            let valid = true;
+
+            form.querySelectorAll('.alert').forEach(alert => alert.style.display = 'none');
+
+            const nameInput = form.querySelector('#name');
+            if (!nameInput.value.trim()) {
+                form.querySelector('#name-error').style.display = 'block';
+                valid = false;
+            }
+
+            const emailInput = form.querySelector('#email');
+            if (!emailInput.value.trim()) {
+                form.querySelector('#email-error').style.display = 'block';
+                valid = false;
+            }
+
+            const feedbackInput = form.querySelector('#feedback');
+            if (!feedbackInput.value.trim()) {
+                form.querySelector('#feedback-error').style.display = 'block';
+                valid = false;
+            }
+
+            const ratingInput = form.querySelector('#rating');
+            if (!ratingInput.value) {
+                form.querySelector('#rating-error').style.display = 'block';
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault();
+                const firstError = form.querySelector('.alert[style*="block"]');
+                if (firstError) {
+                    firstError.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

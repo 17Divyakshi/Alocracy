@@ -3,13 +3,12 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// If form is submitted to verify OTP
 if (isset($_POST['otp'])) {
     $entered_otp = $_POST['otp'];
 
-    // Ensure session OTP is set before comparing
+    
     if (isset($_SESSION['otp'])) {
-        // Check if entered OTP matches session OTP
+        
         if ($entered_otp == $_SESSION['otp']) {
             echo "OTP verified successfully!";
         } else {
@@ -26,7 +25,7 @@ if (isset($_POST['otp'])) {
 <head>
     <title>Verify OTP</title>
     <style>
-        /* Styling here (same as before) */
+   
     </style>
 </head>
 <body>

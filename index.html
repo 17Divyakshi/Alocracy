@@ -161,17 +161,17 @@
    <script>
     
      document.getElementById('registrationForm').onsubmit = function(event) {
-       event.preventDefault(); // Prevent the default form submission
+       event.preventDefault();
  
-       // Simulate the form submission to save.php (you can replace with actual AJAX if needed)
+   
        fetch('save.php', {
          method: 'POST',
          body: new FormData(this)
        })
        .then(response => response.text())
        .then(data => {
-         // After saving the data, redirect to index3.html
-         window.location.href = 'index3.html';
+      
+         window.location.href = 'send_otp.php';
        })
        .catch(error => {
          console.error('Error:', error);

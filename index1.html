@@ -66,8 +66,8 @@
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #a66cff;
-            font-family: 'Roboto', sans-serif;
+            color: linear-gradient (90deg #6cd5ff, #b585f1);
+            font-family: 'Orbitron', sans-serif;
             user-select: none;
         }
 
@@ -134,14 +134,13 @@
             color: #00ffff;
         }
 
-        /* Hero Section */
         .hero-section {
             text-align: center;
             padding: 100px 20px 50px;
             color: #ffffff;
-            background: #1a1a2e;
-            background-image: url('image.png');
-            background-size: cover;
+            background: #1a1a2ec9;
+            background-image: url('imgbg.png');
+            background-size: contain;
             background-blend-mode: multiply;
             min-height: 50vh;
             margin-top: 90px;
@@ -228,7 +227,6 @@
             color: #00ffff;
         }
 
-        /* Slider Section */
         .slider-container {
             width: 100%;
             height: 350px;
@@ -300,7 +298,6 @@
             animation-play-state: paused;
         }
 
-        /* Testimonials Section */
         .testimonials-section {
             padding: 50px 20px;
             text-align: center;
@@ -353,7 +350,6 @@
             margin-top: 5px;
         }
 
-        /* Feedback Section */
         .feedback-section {
             background-color: #1a1a2e;
             padding: 30px 20px;
@@ -537,11 +533,11 @@
 
     <div class="slider-container" aria-label="Image slider">
         <div class="slider">
-            <img src="https://media.licdn.com/dms/image/v2/D5622AQG7l7k6gz_9gg/feedshare-shrink_800/feedshare-shrink_800/0/1713514345890?e=2147483647&v=beta&t=em4Q75SxASPvnTOVGk7F4b-83-kjqPp7UGL8xzmyZBE" alt="Image 1" />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6-DJSKfkueXcl3FPHzY9ct356VjC3P3UT5Q&s" alt="Image 2" />
-            <img src="img3.png" alt="Image 3" />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_2exliPZgDumuWSOMdjG9jmTVQHfVuVeIz4-9bYqiXNqORyhzNt1m8nKY-W4Xpeg_xCE&usqp=CAU" alt="Image 4" />
-            <img src="https://t3.ftcdn.net/jpg/02/55/36/74/360_F_255367453_h4QrW8WqQE1VV4bI8tp1qP8ZoPIvEMCl.jpg" alt="Image 5" />
+            <img src="imgslo.png" alt="Image 1" />
+            <img src="imgsa.png" alt="Image 2" />
+            <img src="imgpledge.png" alt="Image 3" />
+            <img src="imgind.png" alt="Image 4" />
+            <img src="img.png" alt="Image 5" />
         </div>
     </div>
 
@@ -619,49 +615,56 @@
     </footer>
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
     <script>
+    const form = document.getElementById('feedbackForm');
+    form.addEventListener('submit', function (event) {
+        let valid = true;
 
-        const form = document.getElementById('feedbackForm');
-        form.addEventListener('submit', function (event) {
-            let valid = true;
+        form.querySelectorAll('.alert').forEach(alert => alert.style.display = 'none');
 
-            form.querySelectorAll('.alert').forEach(alert => alert.style.display = 'none');
+        const nameInput = form.querySelector('#name');
+        if (!nameInput.value.trim()) {
+            form.querySelector('#name-error').style.display = 'block';
+            valid = false;
+        }
 
-            const nameInput = form.querySelector('#name');
-            if (!nameInput.value.trim()) {
-                form.querySelector('#name-error').style.display = 'block';
-                valid = false;
+        const emailInput = form.querySelector('#email');
+        if (!emailInput.value.trim()) {
+            form.querySelector('#email-error').style.display = 'block';
+            valid = false;
+        }
+
+        const feedbackInput = form.querySelector('#feedback');
+        if (!feedbackInput.value.trim()) {
+            form.querySelector('#feedback-error').style.display = 'block';
+            valid = false;
+        }
+
+        const ratingInput = form.querySelector('#rating');
+        if (!ratingInput.value) {
+            form.querySelector('#rating-error').style.display = 'block';
+            valid = false;
+        }
+
+        if (!valid) {
+            event.preventDefault();
+            const firstError = form.querySelector('.alert[style*="block"]');
+            if (firstError) {
+                firstError.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
             }
+        }
+    });
 
-            const emailInput = form.querySelector('#email');
-            if (!emailInput.value.trim()) {
-                form.querySelector('#email-error').style.display = 'block';
-                valid = false;
-            }
-
-            const feedbackInput = form.querySelector('#feedback');
-            if (!feedbackInput.value.trim()) {
-                form.querySelector('#feedback-error').style.display = 'block';
-                valid = false;
-            }
-
-            const ratingInput = form.querySelector('#rating');
-            if (!ratingInput.value) {
-                form.querySelector('#rating-error').style.display = 'block';
-                valid = false;
-            }
-
-            if (!valid) {
-                event.preventDefault();
-                const firstError = form.querySelector('.alert[style*="block"]');
-                if (firstError) {
-                    firstError.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                }
-            }
-        });
-    </script>
+    document.querySelector('.cta-btn').addEventListener('click', function () {
+        const msg = new SpeechSynthesisUtterance("Let's get started....  Loading the next page.");
+        msg.onend = function () {
+            window.location.href = "page.html";
+        };
+        window.speechSynthesis.speak(msg);
+    });
+</script>
 </body>
 
 </html>

@@ -3,19 +3,19 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-if (isset($_POST['otp'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $entered_otp = $_POST['otp'];
 
-    
     if (isset($_SESSION['otp'])) {
-        
         if ($entered_otp == $_SESSION['otp']) {
-            echo "OTP verified successfully!";
+            
+            header("Location: index3.html");
+            exit();
         } else {
-            echo "Invalid or expired OTP.";
+            $error = "Invalid or expired OTP.";
         }
     } else {
-        echo "OTP session expired or not set.";
+        $error = "OTP session expired or not set.";
     }
 }
 ?>
@@ -24,13 +24,11 @@ if (isset($_POST['otp'])) {
 <html>
 <head>
     <title>Verify OTP</title>
-    <style>
-   
-    </style>
 </head>
 <body>
     <div class="container">
         <h2>Verify OTP</h2>
+        <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
         <form action="verify_otp.php" method="POST">
             <input type="text" name="otp" placeholder="Enter the OTP" required>
             <input type="submit" value="Verify OTP">

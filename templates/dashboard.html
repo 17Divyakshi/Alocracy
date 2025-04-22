@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Voting Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1e2f43;
+        }
+
+        .summary {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            padding: 15px 25px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 120px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .bjp { background-color: #ffcc00; }
+        .congress { background-color: #1e90ff; color: white; }
+        .aap { background-color: #00bcd4; color: white; }
+        .others { background-color: #6c757d; color: white; }
+
+        .charts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+
+        canvas {
+            width: 100%!important;
+            height: 400px !important;
+        }
+        .donut-card canvas {
+    height: 500px !important;
+}
+#partyChartCard{
+    max-width: 400px;
+}
+/* #partyChart{
+    height:700px;
+    width:150px;
+    
+} */
+
+    </style>
+</head>
+<body>
+    <h1>Live Voting Dashboard</h1>
+
+    <div class="summary">
+        <div class="box bjp" id="bjpBox">BJP: 0</div>
+        <div class="box congress" id="congressBox">Congress: 0</div>
+        <div class="box aap" id="aapBox">AAP: 0</div>
+        <div class="box others" id="othersBox">Others: 0</div>
+    </div>
+
+    <div class="summary">
+        <div class="box" id="totalVotes">Total Votes: 0</div>
+        <div class="box" id="uniqueVoters">Unique Voters: 0</div>
+    </div>
+
+    <div class="charts">
+        <div class="chart-card">
+            <h3 style="text-align:center;">Votes by State</h3>
+            <canvas id="stateChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h3 style="text-align:center;">Votes by City</h3>
+            <canvas id="cityChart"></canvas>
+        </div>
+
+        <div class="chart-card" id="partyChartCard">
+            <h3 style="text-align:center;">Vote Share by Party</h3>
+            <canvas id="partyChart"></canvas>
+        </div>
+        
+        
+    </div>
+
+    <script>
+        let stateChart, cityChart,partyChart;
+
+        async function fetchData() {
+            const res = await fetch('/data');
+            const data = await res.json();
+
+            document.getElementById('totalVotes').innerText = `Total Votes: ${data.total_votes}`;
+            document.getElementById('uniqueVoters').innerText = `Unique Voters: ${data.unique_voters}`;
+
+            // Update party vote boxes
+            document.getElementById('bjpBox').innerText = `BJP: ${data.party_counts.BJP || 0}`;
+            document.getElementById('congressBox').innerText = `Congress: ${data.party_counts.Congress || 0}`;
+            document.getElementById('aapBox').innerText = `AAP: ${data.party_counts.AAP || 0}`;
+
+            const totalKnown = (data.party_counts.BJP || 0) + (data.party_counts.Congress || 0) + (data.party_counts.AAP || 0);
+            const others = data.total_votes - totalKnown;
+            document.getElementById('othersBox').innerText = `Others: ${others}`;
+
+            // State Chart
+            const stateLabels = Object.keys(data.state_counts);
+            const stateData = Object.values(data.state_counts);
+            if (stateChart) stateChart.destroy();
+            stateChart = new Chart(document.getElementById('stateChart'), {
+                type: 'bar',
+                data: {
+                    labels: stateLabels,
+                    datasets: [{
+                        label: 'Votes by State',
+                        data: stateData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+            legend: {
+                labels: {
+                    color: '#333',
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    }
+                }
+            }
+        },
+                }
+            });
+
+            // City Chart
+            const cityLabels = Object.keys(data.city_counts);
+            const cityData = Object.values(data.city_counts);
+            if (cityChart) cityChart.destroy();
+            cityChart = new Chart(document.getElementById('cityChart'), {
+                type: 'bar',
+                data: {
+                    labels: cityLabels,
+                    datasets: [{
+                        label: 'Votes by City',
+                        data: cityData,
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+            legend: {
+                labels: {
+                    color: '#333',
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: '#555'
+                },
+                grid: {
+                    color: 'rgba(0,0,0,0.05)'
+                }
+            },
+            y: {
+                ticks: {
+                    color: '#555'
+                },
+                grid: {
+                    color: 'rgba(0,0,0,0.1)'
+                }
+            }
+        },
+        elements: {
+            bar: {
+                borderRadius: 6
+            }}
+                }
+            });
+        
+            const partyLabels = Object.keys(data.party_counts);
+            const partyData = Object.values(data.party_counts);
+            const partyColors = ['#f39c12', '#2980b9', '#27ae60', '#7f8c8d'];
+
+            if (partyChart) partyChart.destroy();
+            partyChart = new Chart(document.getElementById('partyChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: partyLabels,
+                    datasets: [{
+                        data: partyData,
+                        backgroundColor: partyColors
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Vote Share by Party'
+                        }
+                    }
+                }
+            });
+
+        }
+
+        fetchData();
+        setInterval(fetchData, 30000);
+    </script>
+</body>
+</html>
+
+
+
+

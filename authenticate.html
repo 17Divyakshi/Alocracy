@@ -5,51 +5,62 @@
   <title>Voter Authentication</title>
   <style>
     body {
-      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+      background: #0a0f1a;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
+      color: #e0e0e0;
     }
 
     .container {
-      background: white;
+      background: #121829;
       padding: 40px;
       border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px #00f0ff;
       text-align: center;
       width: 350px;
+      border: 2px solid #00f0ff;
     }
 
     h2 {
       margin-bottom: 20px;
-      color: #333;
+      color: #4ab8c0;
+      text-shadow: 0 0 5px #5cecf6be;
     }
 
     input[type="text"] {
       width: 100%;
       padding: 12px;
       margin-bottom: 20px;
-      border: 1px solid #ccc;
+      border: 1px solid #00f0ff;
       border-radius: 10px;
+      background: #0f1624;
+      color: #ffffff;
       font-size: 16px;
     }
 
+    input[type="text"]::placeholder {
+      color: #a3d7ff;
+    }
+
     button {
-      background-color: #2193b0;
-      color: white;
+      background-color: #00f0ff;
+      color: #0a0f1a;
       border: none;
       padding: 12px 25px;
       font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: 0.3s ease;
+      box-shadow: 0 0 10px #00eeffce;
     }
 
     button:hover {
-      background-color: #197a96;
+      background-color: #00bbd483;
+      box-shadow: 0 0 15px #00eaffd6, 0 0 25px #00eaffd3;
     }
   </style>
 </head>

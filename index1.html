@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
     <style>
-
         *,
         *::before,
         *::after {
@@ -544,7 +543,8 @@
     <section class="testimonials-section" id="testimonials">
         <h2>What Our Users Say</h2>
         <div class="testimonial" role="article" aria-label="Testimonial from John Doe">
-            <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="John Doe" class="testimonial-pic" />
+            <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="John Doe" class="testimonial-pic" />
             <div>
                 <p>"This online voting system made our election process seamless and secure."</p>
                 <span>- John Doe, Election Organizer</span>
@@ -552,7 +552,8 @@
             </div>
         </div>
         <div class="testimonial" role="article" aria-label="Testimonial from Jane Smith">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Jane Smith" class="testimonial-pic" />
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Jane Smith" class="testimonial-pic" />
             <div>
                 <p>"I could cast my vote from the comfort of my home with full confidence in its security."</p>
                 <span>- Jane Smith, Voter</span>
@@ -567,17 +568,20 @@
         <form id="feedbackForm" action="/submit-feedback" method="post" novalidate>
             <div class="feedback-field">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" aria-describedby="name-error" required />
+                <input type="text" id="name" name="name" placeholder="Your Name" aria-describedby="name-error"
+                    required />
                 <div class="alert" id="name-error" role="alert">Please fill in your name.</div>
             </div>
             <div class="feedback-field">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Your Email" aria-describedby="email-error" required />
+                <input type="email" id="email" name="email" placeholder="Your Email" aria-describedby="email-error"
+                    required />
                 <div class="alert" id="email-error" role="alert">Please fill in your email.</div>
             </div>
             <div class="feedback-field">
                 <label for="feedback">Feedback:</label>
-                <textarea id="feedback" name="feedback" rows="4" placeholder="Your Feedback" aria-describedby="feedback-error" required></textarea>
+                <textarea id="feedback" name="feedback" rows="4" placeholder="Your Feedback"
+                    aria-describedby="feedback-error" required></textarea>
                 <div class="alert" id="feedback-error" role="alert">Please fill in your feedback.</div>
             </div>
             <div class="feedback-field">
@@ -606,65 +610,72 @@
                 process seamless and trustworthy. With Alocracy, every vote counts, and every voice is heard.</p>
             <p>Follow us on:</p>
             <div class="social-icons" role="list">
-                <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" role="listitem"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" role="listitem"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" role="listitem"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn" role="listitem"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" role="listitem"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" role="listitem"><i
+                        class="fab fa-facebook"></i></a>
+                <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" role="listitem"><i
+                        class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn" role="listitem"><i
+                        class="fab fa-linkedin"></i></a>
             </div>
         </div>
     </footer>
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
     <script>
-    const form = document.getElementById('feedbackForm');
-    form.addEventListener('submit', function (event) {
-        let valid = true;
+        const form = document.getElementById('feedbackForm');
+        form.addEventListener('submit', function (event) {
+            let valid = true;
 
-        form.querySelectorAll('.alert').forEach(alert => alert.style.display = 'none');
+            form.querySelectorAll('.alert').forEach(alert => alert.style.display = 'none');
 
-        const nameInput = form.querySelector('#name');
-        if (!nameInput.value.trim()) {
-            form.querySelector('#name-error').style.display = 'block';
-            valid = false;
-        }
-
-        const emailInput = form.querySelector('#email');
-        if (!emailInput.value.trim()) {
-            form.querySelector('#email-error').style.display = 'block';
-            valid = false;
-        }
-
-        const feedbackInput = form.querySelector('#feedback');
-        if (!feedbackInput.value.trim()) {
-            form.querySelector('#feedback-error').style.display = 'block';
-            valid = false;
-        }
-
-        const ratingInput = form.querySelector('#rating');
-        if (!ratingInput.value) {
-            form.querySelector('#rating-error').style.display = 'block';
-            valid = false;
-        }
-
-        if (!valid) {
-            event.preventDefault();
-            const firstError = form.querySelector('.alert[style*="block"]');
-            if (firstError) {
-                firstError.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
+            const nameInput = form.querySelector('#name');
+            if (!nameInput.value.trim()) {
+                form.querySelector('#name-error').style.display = 'block';
+                valid = false;
             }
-        }
-    });
 
-    document.querySelector('.cta-btn').addEventListener('click', function () {
-        const msg = new SpeechSynthesisUtterance("Let's get started....  Loading the next page.");
-        msg.onend = function () {
-            window.location.href = "page.html";
-        };
-        window.speechSynthesis.speak(msg);
-    });
-</script>
+            const emailInput = form.querySelector('#email');
+            if (!emailInput.value.trim()) {
+                form.querySelector('#email-error').style.display = 'block';
+                valid = false;
+            }
+
+            const feedbackInput = form.querySelector('#feedback');
+            if (!feedbackInput.value.trim()) {
+                form.querySelector('#feedback-error').style.display = 'block';
+                valid = false;
+            }
+
+            const ratingInput = form.querySelector('#rating');
+            if (!ratingInput.value) {
+                form.querySelector('#rating-error').style.display = 'block';
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault();
+                const firstError = form.querySelector('.alert[style*="block"]');
+                if (firstError) {
+                    firstError.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
+        });
+
+        document.querySelector('.cta-btn').addEventListener('click', function () {
+            const msg = new SpeechSynthesisUtterance("Let's get started....  Loading the next page.");
+            msg.onend = function () {
+                window.location.href = "page.html";
+            };
+            window.speechSynthesis.speak(msg);
+        });
+    </script>
+    <script>
+        (function () { if (!window.chatbase || window.chatbase("getState") !== "initialized") { window.chatbase = (...arguments) => { if (!window.chatbase.q) { window.chatbase.q = [] } window.chatbase.q.push(arguments) }; window.chatbase = new Proxy(window.chatbase, { get(target, prop) { if (prop === "q") { return target.q } return (...args) => target(prop, ...args) } }) } const onLoad = function () { const script = document.createElement("script"); script.src = "https://www.chatbase.co/embed.min.js"; script.id = "lgNLwpDBYeRhQyORBg_TE"; script.domain = "www.chatbase.co"; document.body.appendChild(script) }; if (document.readyState === "complete") { onLoad() } else { window.addEventListener("load", onLoad) } })();
+    </script>
 </body>
 
 </html>

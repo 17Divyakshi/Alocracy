@@ -1,8 +1,8 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Voter Registration</title>
+  <title>Voter Registration(Alocracy)</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -68,12 +68,13 @@
 <body>
   <div class="container">
     <h2>Register to Vote</h2>
-    <form action="save.php" method="POST">
+    <form action="save.php" method="POST" id="registrationForm">
       <input type="text" name="name" placeholder="Full Name" required>
       <input type="text" name="city" placeholder="City" required>
       <input type="text" name="state" placeholder="State" required>
-      <input type="number" name="aadhar" placeholder="Aadhar Number" required>
-      <button type="submit"><a href="index3.html">Register</a></button>
+      <!-- Changed type to text and added id for Aadhaar -->
+      <input type="text" name="aadhar" id="aadhar" placeholder="Aadhaar Number" required maxlength="12" pattern="[2-9][0-9]{11}">
+      <button type="submit">Register</button>
     </form>
   </div>
 </body>
@@ -161,16 +162,15 @@
    <script>
     
      document.getElementById('registrationForm').onsubmit = function(event) {
-       event.preventDefault();
+       event.preventDefault(); 
  
-   
        fetch('save.php', {
          method: 'POST',
          body: new FormData(this)
        })
        .then(response => response.text())
        .then(data => {
-      
+         
          window.location.href = 'send_otp.php';
        })
        .catch(error => {

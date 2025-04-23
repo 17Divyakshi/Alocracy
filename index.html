@@ -98,23 +98,116 @@
      }
  
      
-     .container {
+     body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #89f7fe, #66a6ff);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
   background: #ffffff;
   padding: 40px;
   border-radius: 16px;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
   width: 350px;
   text-align: center;
-  /* Smooth transition for transform and shadow */
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  /* Animation for fade-in and scale effect */
+  transition: 
+    transform 0.4s cubic-bezier(.25,.8,.25,1), 
+    box-shadow 0.4s cubic-bezier(.25,.8,.25,1),
+    background 0.3s;
   animation: fadeInScale 0.6s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, #66a6ff55 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s;
+  z-index: 0;
 }
 
 .container:hover {
-  /* Scale up and deeper shadow on hover */
-  transform: scale(1.05);
-  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
+  transform: scale(1.06) rotate(-1deg);
+  box-shadow: 0 32px 60px rgba(0, 0, 0, 0.18);
+  background: #f6fbff;
+}
+
+.container:hover::before {
+  opacity: 1;
+}
+
+h2 {
+  margin-bottom: 25px;
+  color: #333;
+  position: relative;
+  z-index: 1;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: 
+    all 0.3s cubic-bezier(.25,.8,.25,1),
+    box-shadow 0.3s cubic-bezier(.25,.8,.25,1);
+  font-size: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+input[type="text"]:hover,
+input[type="number"]:hover {
+  border-color: #007BFF;
+  box-shadow: 0 0 8px #66a6ff88;
+  background: #f0f8ff;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: #66a6ff;
+  box-shadow: 0 0 12px #66a6ff88;
+  outline: none;
+  background: #e6f2ff;
+}
+
+button {
+  padding: 12px 25px;
+  background: linear-gradient(90deg, #007BFF, #66a6ff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 
+    background 0.3s cubic-bezier(.25,.8,.25,1),
+    transform 0.2s cubic-bezier(.25,.8,.25,1),
+    box-shadow 0.2s cubic-bezier(.25,.8,.25,1);
+  box-shadow: 0 4px 12px rgba(102,166,255,0.12);
+  position: relative;
+  z-index: 1;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #0056b3, #89f7fe);
+  transform: scale(1.07) rotate(1deg);
+  box-shadow: 0 8px 24px rgba(102,166,255,0.22);
 }
 
 @keyframes fadeInScale {

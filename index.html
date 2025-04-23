@@ -97,14 +97,37 @@
        height: 100vh;
      }
  
+     
      .container {
-       background: #ffffff;
-       padding: 40px;
-       border-radius: 16px;
-       box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
-       width: 350px;
-       text-align: center;
-     }
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+  /* Smooth transition for transform and shadow */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  /* Animation for fade-in and scale effect */
+  animation: fadeInScale 0.6s ease forwards;
+}
+
+.container:hover {
+  /* Scale up and deeper shadow on hover */
+  transform: scale(1.05);
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
  
      h2 {
        margin-bottom: 25px;

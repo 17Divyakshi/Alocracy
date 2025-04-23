@@ -192,11 +192,13 @@
         function voteNow() {
             speak("Proceeding to secure voting");
             alert("Proceeding to secure voting");
+            window.location.href = "index.html";
         }
 
         function openDashboard() {
             speak("Accessing Dashboard");
             alert("Accessing Dashboard");
+            window.location.href = "templates/dashboard.html";
         }
 
         function openAIBot() {
@@ -210,9 +212,10 @@
             dots[index].classList.add('active');
         }
     </script>
+
     <script>
-        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="LWeNHkcRUT8ToRDvsG0VY";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-        </script>
+        (function () { if (!window.chatbase || window.chatbase("getState") !== "initialized") { window.chatbase = (...arguments) => { if (!window.chatbase.q) { window.chatbase.q = [] } window.chatbase.q.push(arguments) }; window.chatbase = new Proxy(window.chatbase, { get(target, prop) { if (prop === "q") { return target.q } return (...args) => target(prop, ...args) } }) } const onLoad = function () { const script = document.createElement("script"); script.src = "https://www.chatbase.co/embed.min.js"; script.id = "LWeNHkcRUT8ToRDvsG0VY"; script.domain = "www.chatbase.co"; document.body.appendChild(script) }; if (document.readyState === "complete") { onLoad() } else { window.addEventListener("load", onLoad) } })();
+    </script>
 </body>
 
 </html>

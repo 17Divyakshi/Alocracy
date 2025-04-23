@@ -4,75 +4,75 @@
     <title>Live Voting Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f6f9;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+        color: #ffffff;
+        margin: 0;
+        padding: 20px;
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 10px;
-            color: #1e2f43;
-        }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #66fcf1;
+        text-shadow: 0 0 5px #45a29e;
+    }
 
-        .summary {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
+    .summary {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
 
-        .box {
-            padding: 15px 25px;
-            border-radius: 10px;
-            background-color: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            min-width: 120px;
-            font-size: 16px;
-            font-weight: bold;
-        }
+    .box {
+        padding: 15px 25px;
+        border-radius: 10px;
+        background-color: #1f2833;
+        box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+        text-align: center;
+        min-width: 140px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #ffffff;
+    }
 
-        .bjp { background-color: #ffcc00; }
-        .congress { background-color: #1e90ff; color: white; }
-        .aap { background-color: #00bcd4; color: white; }
-        .others { background-color: #6c757d; color: white; }
+    .bjp { background-color: #ffcc00; color: #000; }
+    .congress { background-color: #1e90ff; color: #fff; }
+    .aap { background-color: #00bcd4; color: #fff; }
+    .others { background-color: #8e44ad; color: #fff; }
 
-        .charts {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
+    .charts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
 
-        .chart-card {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            width: 600px;
-            max-width: 90%;
-        }
+    .chart-card {
+        background: #1f2833;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(102, 252, 241, 0.15);
+        width: 600px;
+        max-width: 90%;
+        color: #fff;
+    }
 
-        canvas {
-            width: 100%!important;
-            height: 400px !important;
-        }
-        .donut-card canvas {
-    height: 500px !important;
-}
-#partyChartCard{
-    max-width: 400px;
-}
-/* #partyChart{
-    height:700px;
-    width:150px;
-    
-} */
+    canvas {
+        width: 100% !important;
+        height: 400px !important;
+    }
+
+    .donut-card canvas {
+        height: 500px !important;
+    }
+
+    #partyChartCard {
+        max-width: 400px;
+    }
 
     </style>
 </head>
@@ -244,7 +244,3 @@
     </script>
 </body>
 </html>
-
-
-
-

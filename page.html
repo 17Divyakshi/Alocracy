@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voting Landing Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Raleway:wght@300;400;600&display=swap"
+        rel="stylesheet">
     <style>
-        .head{
+        .head {
             margin-left: 0;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 2vh;
             position: fixed;
             display: flex;
@@ -19,51 +22,76 @@
             top: 10px;
             left: 15px;
             z-index: 1000;
-            color:#2D2D2D;
-            background: linear-gradient(to right, #0066CC, #33CCFF, #00CC99); 
+            color: #2D2D2D;
+            background: linear-gradient(to right, #00ffff, #33ccff, #00cc99);
             background-clip: text;
             -webkit-background-clip: text;
-            color: transparent; 
-            font-weight:bold;
+            color: transparent;
+            font-weight: bold;
         }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: linear-gradient(to right, #dbeafe, #a0c7f6);
+            background: linear-gradient(135deg, #254f62, #012554, #254f62);
+            color: #e0f7fa;
             overflow: hidden;
         }
+
+
         .container {
             display: flex;
             gap: 30px;
-            position: relative;                                                                                                                                                                                                             
+            position: relative;
         }
+
         .card {
             width: 220px;
             height: 350px;
-            background: white;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
             padding: 20px;
             opacity: 0;
             animation: fadeIn 1s forwards;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(89, 145, 176, 0.775);
+            color: #e0f7fa;
         }
-        .card:nth-child(1) { animation-delay: 0.5s; }
-        .card:nth-child(2) { animation-delay: 1s; }
-        .card:nth-child(3) { animation-delay: 1.5s; }
+
+
+        .card:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 1.5s;
+        }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* .card:hover {
@@ -75,10 +103,12 @@
             height: 80px;
             margin-bottom: 15px;
         }
+
         .vote-card {
-            background-color: #007bff;
+            background-color: #081a42;
             color: white;
         }
+
         .slider {
             position: absolute;
             bottom: -50px;
@@ -87,6 +117,7 @@
             display: flex;
             gap: 10px;
         }
+
         .dot {
             width: 15px;
             height: 15px;
@@ -95,28 +126,30 @@
             cursor: pointer;
             transition: background 0.3s;
         }
+
         .dot.active {
             background: #007bff;
         }
-        .card:hover {
-    transform: translateY(-20px) scale(1.1);
-    box-shadow: 0 10px 30px rgba(0, 162, 255, 0.9), 
-                0 0 15px rgba(255, 255, 255, 0.8);
-}
-.vote-card:hover {
-    transform: translateY(-20px) scale(1.1);
-    box-shadow: 0 10px 30px rgba(237, 230, 230, 0.9), 
-                0 0 15px rgba(0, 162, 255, 1);
-}
 
-        
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #00ffff, 0 0 30px #57caf0;
+            transition: all 0.4s ease;
+        }
+
+        .vote-card:hover {
+            transform: translateY(-20px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(237, 230, 230, 0.9),
+                0 0 15px rgba(0, 162, 255, 1);
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="head">
-        <h1>Alocracy</h1>
-    </div>
+            <h1>Alocracy</h1>
+        </div>
         <div class="card" onclick="openDashboard()">
             <img src="https://img.icons8.com/ios-filled/100/000000/graph.png" alt="Dashboard Icon">
             <h3>Dashboard</h3>
@@ -148,38 +181,44 @@
         function openAIBot() {
             alert("Launching AI Bot");
         }
-        
+
         function changeSlide(index) {
             let dots = document.querySelectorAll('.dot');
             dots.forEach(dot => dot.classList.remove('active'));
             dots[index].classList.add('active');
         }
         function speak(text) {
-      const msg = new SpeechSynthesisUtterance();
-      msg.text = text;
-      window.speechSynthesis.speak(msg);
-    }
+            const msg = new SpeechSynthesisUtterance();
+            msg.text = text;
+            window.speechSynthesis.speak(msg);
+        }
 
-    function voteNow() {
-      speak("Redirecting to Vote Now page");
-      alert("Redirecting to Vote Now page");
-    }
+        function voteNow() {
+            speak("Proceeding to secure voting");
+            window.location.href = "index.html";
+        }
 
-    function openDashboard() {
-      speak("Opening Dashboard");
-      alert("Opening Dashboard");
-    }
+        function openDashboard() {
+            speak("Accessing Dashboard");
+            window.location.href = "templates/dashboard.html";
+        }
 
-    function openAIBot() {
-      speak("Launching AI Bot");
-      alert("Launching AI Bot");
-    }
+        function openAIBot() {
+            speak("Launching intelligent assistant");
+            alert("Launching intelligent assistant");
+            // window.location.href = ".html";
+        }
 
-    function changeSlide(index) {
-      let dots = document.querySelectorAll('.dot');
-      dots.forEach(dot => dot.classList.remove('active'));
-      dots[index].classList.add('active');
-    }
+        function changeSlide(index) {
+            let dots = document.querySelectorAll('.dot');
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+        }
+    </script>
+
+    <script>
+        (function () { if (!window.chatbase || window.chatbase("getState") !== "initialized") { window.chatbase = (...arguments) => { if (!window.chatbase.q) { window.chatbase.q = [] } window.chatbase.q.push(arguments) }; window.chatbase = new Proxy(window.chatbase, { get(target, prop) { if (prop === "q") { return target.q } return (...args) => target(prop, ...args) } }) } const onLoad = function () { const script = document.createElement("script"); script.src = "https://www.chatbase.co/embed.min.js"; script.id = "LWeNHkcRUT8ToRDvsG0VY"; script.domain = "www.chatbase.co"; document.body.appendChild(script) }; if (document.readyState === "complete") { onLoad() } else { window.addEventListener("load", onLoad) } })();
     </script>
 </body>
+
 </html>

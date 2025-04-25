@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+p<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
     <style>
-
         *,
         *::before,
         *::after {
@@ -66,8 +65,8 @@
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            color: #a66cff;
-            font-family: 'Roboto', sans-serif;
+            color: linear-gradient (90deg #6cd5ff, #b585f1);
+            font-family: 'Orbitron', sans-serif;
             user-select: none;
         }
 
@@ -134,14 +133,13 @@
             color: #00ffff;
         }
 
-        /* Hero Section */
         .hero-section {
             text-align: center;
             padding: 100px 20px 50px;
             color: #ffffff;
-            background: #1a1a2e;
-            background-image: url('image.png');
-            background-size: cover;
+            background: #1a1a2ec9;
+            background-image: url('imgbg.png');
+            background-size: contain;
             background-blend-mode: multiply;
             min-height: 50vh;
             margin-top: 90px;
@@ -228,7 +226,6 @@
             color: #00ffff;
         }
 
-        /* Slider Section */
         .slider-container {
             width: 100%;
             height: 350px;
@@ -300,7 +297,6 @@
             animation-play-state: paused;
         }
 
-        /* Testimonials Section */
         .testimonials-section {
             padding: 50px 20px;
             text-align: center;
@@ -353,7 +349,6 @@
             margin-top: 5px;
         }
 
-        /* Feedback Section */
         .feedback-section {
             background-color: #1a1a2e;
             padding: 30px 20px;
@@ -495,9 +490,24 @@
     <nav class="navbar" role="navigation" aria-label="Primary Navigation">
         <div class="nav-container">
             <div class="logo-area">
-                <div class="logo">Alocracy</div>
-                <h4 class="slogan">~Where AI Meets Democracy</h4>
-            </div>
+                <div style="display: flex; align-items: center;">
+                  <!-- Large Voting SVG Logo -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" style="margin-right:16px; flex-shrink:0;">
+                    <rect x="8" y="24" width="48" height="28" rx="6" fill="#a66cff" stroke="#00ffff" stroke-width="2"/>
+                    <rect x="18" y="8" width="28" height="18" rx="4" fill="#fff" stroke="#a66cff" stroke-width="2"/>
+                    <path d="M26 18l6 6 10-10" fill="none" stroke="#00d09c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="24" y="32" width="16" height="4" rx="2" fill="#fff" opacity="0.7"/>
+                    <circle cx="32" cy="38" r="2" fill="#00ffff"/>
+                    <circle cx="40" cy="38" r="2" fill="#00ffff"/>
+                    <circle cx="24" cy="38" r="2" fill="#00ffff"/>
+                  </svg>
+                  <div>
+                    <div class="logo" style="font-size:2.2rem;">Alocracy</div>
+                    <div class="slogan" style="font-size:1.05rem; color:#9ee2ff; margin-top:2px;">where ai meets democracy</div>
+                  </div>
+                </div>
+              </div>
+              
 
             <ul class="nav-links" role="menubar">
                 <li role="none"><a href="#home" role="menuitem" tabindex="0">Home</a></li>
@@ -537,18 +547,19 @@
 
     <div class="slider-container" aria-label="Image slider">
         <div class="slider">
-            <img src="https://media.licdn.com/dms/image/v2/D5622AQG7l7k6gz_9gg/feedshare-shrink_800/feedshare-shrink_800/0/1713514345890?e=2147483647&v=beta&t=em4Q75SxASPvnTOVGk7F4b-83-kjqPp7UGL8xzmyZBE" alt="Image 1" />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6-DJSKfkueXcl3FPHzY9ct356VjC3P3UT5Q&s" alt="Image 2" />
-            <img src="img3.png" alt="Image 3" />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_2exliPZgDumuWSOMdjG9jmTVQHfVuVeIz4-9bYqiXNqORyhzNt1m8nKY-W4Xpeg_xCE&usqp=CAU" alt="Image 4" />
-            <img src="https://t3.ftcdn.net/jpg/02/55/36/74/360_F_255367453_h4QrW8WqQE1VV4bI8tp1qP8ZoPIvEMCl.jpg" alt="Image 5" />
+            <img src="imgslo.png" alt="Image 1" />
+            <img src="imgsa.png" alt="Image 2" />
+            <img src="imgpledge.png" alt="Image 3" />
+            <img src="imgind.png" alt="Image 4" />
+            <img src="img.png" alt="Image 5" />
         </div>
     </div>
 
     <section class="testimonials-section" id="testimonials">
         <h2>What Our Users Say</h2>
         <div class="testimonial" role="article" aria-label="Testimonial from John Doe">
-            <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="John Doe" class="testimonial-pic" />
+            <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="John Doe" class="testimonial-pic" />
             <div>
                 <p>"This online voting system made our election process seamless and secure."</p>
                 <span>- John Doe, Election Organizer</span>
@@ -556,7 +567,8 @@
             </div>
         </div>
         <div class="testimonial" role="article" aria-label="Testimonial from Jane Smith">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Jane Smith" class="testimonial-pic" />
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Jane Smith" class="testimonial-pic" />
             <div>
                 <p>"I could cast my vote from the comfort of my home with full confidence in its security."</p>
                 <span>- Jane Smith, Voter</span>
@@ -571,17 +583,20 @@
         <form id="feedbackForm" action="/submit-feedback" method="post" novalidate>
             <div class="feedback-field">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" aria-describedby="name-error" required />
+                <input type="text" id="name" name="name" placeholder="Your Name" aria-describedby="name-error"
+                    required />
                 <div class="alert" id="name-error" role="alert">Please fill in your name.</div>
             </div>
             <div class="feedback-field">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Your Email" aria-describedby="email-error" required />
+                <input type="email" id="email" name="email" placeholder="Your Email" aria-describedby="email-error"
+                    required />
                 <div class="alert" id="email-error" role="alert">Please fill in your email.</div>
             </div>
             <div class="feedback-field">
                 <label for="feedback">Feedback:</label>
-                <textarea id="feedback" name="feedback" rows="4" placeholder="Your Feedback" aria-describedby="feedback-error" required></textarea>
+                <textarea id="feedback" name="feedback" rows="4" placeholder="Your Feedback"
+                    aria-describedby="feedback-error" required></textarea>
                 <div class="alert" id="feedback-error" role="alert">Please fill in your feedback.</div>
             </div>
             <div class="feedback-field">
@@ -610,16 +625,19 @@
                 process seamless and trustworthy. With Alocracy, every vote counts, and every voice is heard.</p>
             <p>Follow us on:</p>
             <div class="social-icons" role="list">
-                <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" role="listitem"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" role="listitem"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" role="listitem"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn" role="listitem"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" role="listitem"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" role="listitem"><i
+                        class="fab fa-facebook"></i></a>
+                <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" role="listitem"><i
+                        class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn" role="listitem"><i
+                        class="fab fa-linkedin"></i></a>
             </div>
         </div>
     </footer>
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
     <script>
-
         const form = document.getElementById('feedbackForm');
         form.addEventListener('submit', function (event) {
             let valid = true;
@@ -649,7 +667,7 @@
                 form.querySelector('#rating-error').style.display = 'block';
                 valid = false;
             }
-
+            
             if (!valid) {
                 event.preventDefault();
                 const firstError = form.querySelector('.alert[style*="block"]');
@@ -661,7 +679,17 @@
                 }
             }
         });
-    </script>
-</body>
 
+        document.querySelector('.cta-btn').addEventListener('click', function () {
+            const msg = new SpeechSynthesisUtterance("Let's get started....  Loading the next page.");
+            msg.onend = function () {
+                window.location.href = "page.html";
+            };
+            window.speechSynthesis.speak(msg);
+        });
+    </script>
+    <script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="LWeNHkcRUT8ToRDvsG0VY";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+        </script>
+</body>
 </html>

@@ -78,6 +78,11 @@
 </head>
 <body>
     <h1>Live Voting Dashboard</h1>
+    <div class="card mt-4">
+        <h5>Insights Summary</h5>
+        <div id="insights">Loading insights...</div> <!-- 👈 This id must match -->
+      </div>
+      
 
     <div class="summary">
         <div class="box bjp" id="bjpBox">BJP: 0</div>
@@ -111,6 +116,24 @@
     </div>
 
     <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    fetch('/data')
+      .then(response => response.json())
+      .then(data => {
+        const insightsBox = document.getElementById("insights");
+        if (insightsBox) {
+          if (data.insights && data.insights.length > 0) {
+            insightsBox.innerHTML = data.insights.map(i => `💡 ${i}`).join("<br>");
+          } else {
+            insightsBox.innerHTML = "No insights available yet.";
+          }
+        } else {
+          console.warn("No element with ID 'insights' found!");
+        }
+      });
+  });
+
+
         let stateChart, cityChart,partyChart;
 
         async function fetchData() {
@@ -122,7 +145,7 @@
 
             // Update party vote boxes
             document.getElementById('bjpBox').innerText = `BJP: ${data.party_counts.BJP || 0}`;
-            document.getElementById('congressBox').innerText = `Congress: ${data.party_counts.Congress || 0}`;
+            document.getElementById('congressBox').innerText = `CONGRESS: ${data.party_counts.Congress || 0}`;
             document.getElementById('aapBox').innerText = `AAP: ${data.party_counts.AAP || 0}`;
 
             const totalKnown = (data.party_counts.BJP || 0) + (data.party_counts.Congress || 0) + (data.party_counts.AAP || 0);

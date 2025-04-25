@@ -1,32 +1,26 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Voter Registration(Alocracy)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <title>Voter Registration (Alocracy)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=350, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     body {
-  font-family: 'Poppins', 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(120deg, #0f0c29, #302b63) ;
-  background-size: cover;
-  overflow: hidden;
-}
+      font-family: 'Poppins', 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(120deg, #0f0c29, #302b63);
+      background-size: cover;
+      overflow: hidden;
+    }
 
-    
-
-    /* Glassmorphism Card */
     .container {
       background: rgba(26, 26, 46, 0.8);
       border-radius: 22px;
@@ -41,10 +35,12 @@
       transition: box-shadow 0.3s;
       animation: fadeInScale 0.8s cubic-bezier(.4,1.2,.6,1);
     }
+
     @keyframes fadeInScale {
       0% { opacity: 0; transform: scale(0.85);}
       100% { opacity: 1; transform: scale(1);}
     }
+
     h2 {
       margin-bottom: 28px;
       color: #00ffff;
@@ -54,12 +50,12 @@
       text-shadow: 0 2px 10px #00ffff33;
     }
 
-    /* Floating Label with Icon */
     .form-group {
       position: relative;
       margin-bottom: 28px;
       text-align: left;
     }
+
     .form-icon {
       position: absolute;
       left: 13px;
@@ -67,9 +63,9 @@
       font-size: 1.2em;
       color: #00ffffcc;
       pointer-events: none;
-      transition: color 0.2s;
       z-index: 2;
     }
+
     .floating-label {
       position: absolute;
       left: 44px;
@@ -82,6 +78,7 @@
       background: transparent;
       z-index: 2;
     }
+
     input:focus ~ .floating-label,
     input:not(:placeholder-shown) ~ .floating-label {
       top: -13px;
@@ -94,6 +91,7 @@
       border-radius: 4px;
       box-shadow: 0 1px 4px #00ffff22;
     }
+
     input[type="text"], input[type="number"] {
       width: 85%;
       padding: 15px 13px 15px 40px;
@@ -104,21 +102,21 @@
       font-size: 16px;
       margin: 0;
       box-shadow: 0 1.5px 6px #00ffff33;
-      transition: border 0.3s, box-shadow 0.3s, background 0.3s;
       outline: none;
       position: relative;
       z-index: 1;
     }
+
     input[type="text"]:focus, input[type="number"]:focus {
       border-color: #00ffff;
       box-shadow: 0 0 10px #00ffff99;
       background: #18192b;
     }
+
     input[type="text"]::placeholder, input[type="number"]::placeholder {
       color: transparent;
     }
 
-    /* Neon Glowing Button with Ripple */
     button {
       width: 100%;
       padding: 15px 0;
@@ -131,13 +129,12 @@
       font-weight: 700;
       cursor: pointer;
       box-shadow: 0 2px 18px #00ffff55, 0 0 0 #a66cff;
-      transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
       letter-spacing: 0.6px;
       position: relative;
       overflow: hidden;
       outline: none;
     }
-    
+
     button:before {
       content: '';
       position: absolute;
@@ -150,13 +147,12 @@
       transition: transform 0.5s cubic-bezier(.4,1.2,.6,1);
       z-index: 0;
     }
+
     button:active:before {
       transform: translate(-50%, -50%) scale(1);
       transition: 0s;
     }
-    
 
-    /* Responsive */
     @media (max-width: 400px) {
       .container { padding: 22px 5px; width: 98vw;}
       h2 { font-size: 1.3rem;}
@@ -166,7 +162,7 @@
 <body>
   <div class="container">
     <h2>Register to Vote</h2>
-    <form action="save.php" method="POST" id="registrationForm" autocomplete="on">
+    <form id="registrationForm" autocomplete="on">
       <div class="form-group">
         <span class="material-icons form-icon">person</span>
         <input type="text" name="name" placeholder="Full Name" required autocomplete="name" id="name">
@@ -184,15 +180,34 @@
       </div>
       <div class="form-group">
         <span class="material-icons form-icon">credit_card</span>
-        <input type="number" name="aadhar" placeholder="Aadhar Number" required autocomplete="off" id="aadhar">
+        <input 
+          type="text" 
+          name="aadhar" 
+          placeholder="Aadhar Number" 
+          required 
+          autocomplete="off" 
+          id="aadhar"
+          pattern="[2-9][0-9]{11}"
+          title="Aadhar number must be 12 digits and must not start with 0 or 1">
         <label class="floating-label" for="aadhar">Aadhar Number</label>
       </div>
       <button type="submit">Register</button>
     </form>
   </div>
+
   <script>
     document.getElementById('registrationForm').onsubmit = function(event) {
       event.preventDefault();
+
+      const aadhar = document.getElementById('aadhar').value.trim();
+      const aadharPattern = /^[2-9][0-9]{11}$/;
+
+      if (!aadharPattern.test(aadhar)) {
+        alert("Please enter a valid Aadhar number:\n- 12 digits only\n- Cannot start with 0 or 1.");
+        return false;
+      }
+
+      // If valid, send form
       fetch('save.php', {
         method: 'POST',
         body: new FormData(this)

@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Voter Registration(Alocracy)</title>
+  <title>Voter Registration</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -68,45 +68,115 @@
 <body>
   <div class="container">
     <h2>Register to Vote</h2>
-    <form action="save.php" method="POST" id="registrationForm">
+    <form action="save.php" method="POST">
       <input type="text" name="name" placeholder="Full Name" required>
       <input type="text" name="city" placeholder="City" required>
       <input type="text" name="state" placeholder="State" required>
-      <!-- Changed type to text and added id for Aadhaar -->
-      <input type="text" name="aadhar" id="aadhar" placeholder="Aadhaar Number" required maxlength="12" pattern="[2-9][0-9]{11}">
-      <button type="submit">Register</button>
+      <input type="number" name="aadhar" placeholder="Aadhar Number" required>
+      <button type="submit"><a href="index3.html">Register</a></button>
     </form>
   </div>
-
-  <script>
-    document.getElementById('registrationForm').onsubmit = function(event) {
-      // Aadhaar validation
-      var aadhar = document.getElementById('aadhar').value.trim();
-      var aadhaarPattern = /^[2-9][0-9]{11}$/;
-
-      if (!aadhaarPattern.test(aadhar)) {
-        alert("Invalid Aadhaar number. It must be 12 digits and not start with 0 or 1.");
-        document.getElementById('aadhar').focus();
-        event.preventDefault();
-        return false;
-      }
-
-      // Simulate the form submission to save.php (you can replace with actual AJAX if needed)
-      event.preventDefault(); // Prevent the default form submission
-
-      fetch('save.php', {
-        method: 'POST',
-        body: new FormData(this)
-      })
-      .then(response => response.text())
-      .then(data => {
-        // After saving the data, redirect to index3.html
-        window.location.href = 'send_otp.php';
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    };
-  </script>
 </body>
 </html>
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <title>Voter Registration(Alocracy)</title>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+   <style>
+     body {
+       font-family: 'Poppins', sans-serif;
+       background: linear-gradient(to right, #89f7fe, #66a6ff);
+       margin: 0;
+       padding: 0;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       height: 100vh;
+     }
+ 
+     .container {
+       background: #ffffff;
+       padding: 40px;
+       border-radius: 16px;
+       box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+       width: 350px;
+       text-align: center;
+     }
+ 
+     h2 {
+       margin-bottom: 25px;
+       color: #333;
+     }
+ 
+     input[type="text"],
+     input[type="number"] {
+       width: 100%;
+       padding: 12px;
+       margin: 12px 0;
+       border: 1px solid #ccc;
+       border-radius: 8px;
+       transition: all 0.3s ease;
+     }
+ 
+     input[type="text"]:focus,
+     input[type="number"]:focus {
+       border-color: #66a6ff;
+       box-shadow: 0 0 5px rgba(102, 166, 255, 0.5);
+       outline: none;
+     }
+ 
+     button {
+       padding: 12px 25px;
+       background: #007BFF;
+       color: white;
+       border: none;
+       border-radius: 8px;
+       font-size: 16px;
+       font-weight: bold;
+       cursor: pointer;
+       margin-top: 10px;
+       transition: background 0.3s ease;
+     }
+ 
+     button:hover {
+       background: #0056b3;
+     }
+   </style>
+ </head>
+ <body>
+   <div class="container">
+     <h2>Register to Vote</h2>
+     <form action="save.php" method="POST" id="registrationForm">
+       <input type="text" name="name" placeholder="Full Name" required>
+       <input type="text" name="city" placeholder="City" required>
+       <input type="text" name="state" placeholder="State" required>
+       <input type="number" name="aadhar" placeholder="Aadhar Number" required>
+       <button type="submit">Register</button>
+     </form>
+   </div>
+ 
+   <script>
+    
+     document.getElementById('registrationForm').onsubmit = function(event) {
+       event.preventDefault(); // Prevent the default form submission
+ 
+       // Simulate the form submission to save.php (you can replace with actual AJAX if needed)
+       fetch('save.php', {
+         method: 'POST',
+         body: new FormData(this)
+       })
+       .then(response => response.text())
+       .then(data => {
+         // After saving the data, redirect to index3.html
+         window.location.href = 'index3.html';
+       })
+       .catch(error => {
+         console.error('Error:', error);
+       });
+     };
+   </script>
+ </body>
+ </html>

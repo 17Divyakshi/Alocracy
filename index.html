@@ -71,8 +71,7 @@
     <form action="save.php" method="POST" id="registrationForm">
       <input type="text" name="name" placeholder="Full Name" required>
       <input type="text" name="city" placeholder="City" required>
-      <input type="text" name="state" placeholder="State" required>
-      <!-- Changed type to text and added id for Aadhaar -->
+
       <input type="text" name="aadhar" id="aadhar" placeholder="Aadhaar Number" required maxlength="12" pattern="[2-9][0-9]{11}">
       <button type="submit">Register</button>
     </form>
@@ -80,7 +79,7 @@
 
   <script>
     document.getElementById('registrationForm').onsubmit = function(event) {
-      // Aadhaar validation
+
       var aadhar = document.getElementById('aadhar').value.trim();
       var aadhaarPattern = /^[2-9][0-9]{11}$/;
 
@@ -91,16 +90,13 @@
         return false;
       }
 
-      // Simulate the form submission to save.php (you can replace with actual AJAX if needed)
-      event.preventDefault(); // Prevent the default form submission
-
+      event.preventDefault(); 
       fetch('save.php', {
         method: 'POST',
         body: new FormData(this)
       })
       .then(response => response.text())
       .then(data => {
-        // After saving the data, redirect to index3.html
         window.location.href = 'send_otp.php';
       })
       .catch(error => {

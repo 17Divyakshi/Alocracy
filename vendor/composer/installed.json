@@ -44,7 +44,11 @@
             },
             "time": "2024-11-24T18:04:13+00:00",
             "type": "library",
+<<<<<<< HEAD
             "installation-source": "dist",
+=======
+            "installation-source": "source",
+>>>>>>> fbdf7bcfd80abd2c83b2b77edee86978954f5126
             "autoload": {
                 "psr-4": {
                     "PHPMailer\\PHPMailer\\": "src/"

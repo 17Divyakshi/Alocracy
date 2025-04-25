@@ -1,67 +1,165 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Voter Registration(Alocracy)</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>Voter Registration (Alocracy)</title>
+  <meta name="viewport" content="width=350, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #89f7fe, #66a6ff);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(120deg, #0f0c29, #302b63) ;
+  background-size: cover;
+  overflow: hidden;
+}
 
+    
+
+    /* Glassmorphism Card */
     .container {
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
-      width: 350px;
+      background: rgba(26, 26, 46, 0.8);
+      border-radius: 22px;
+      box-shadow: 0 8px 38px #a66cff55, 0 1.5px 6px #00ffff44;
+      width: 355px;
+      padding: 44px 34px 36px 34px;
       text-align: center;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(14px) saturate(140%);
+      border: 1.5px solid #a66cff44;
+      transition: box-shadow 0.3s;
+      animation: fadeInScale 0.8s cubic-bezier(.4,1.2,.6,1);
     }
-
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.85);}
+      100% { opacity: 1; transform: scale(1);}
+    }
     h2 {
-      margin-bottom: 25px;
-      color: #333;
+      margin-bottom: 28px;
+      color: #00ffff;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      font-size: 1.7rem;
+      text-shadow: 0 2px 10px #00ffff33;
     }
 
-    input[type="text"],
-    input[type="number"] {
+    /* Floating Label with Icon */
+    .form-group {
+      position: relative;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .form-icon {
+      position: absolute;
+      left: 13px;
+      top: 18px;
+      font-size: 1.2em;
+      color: #00ffffcc;
+      pointer-events: none;
+      transition: color 0.2s;
+      z-index: 2;
+    }
+    .floating-label {
+      position: absolute;
+      left: 44px;
+      top: 18px;
+      color: #9ee2ff;
+      font-size: 1em;
+      pointer-events: none;
+      transition: 0.2s;
+      opacity: 0.9;
+      background: transparent;
+      z-index: 2;
+    }
+    input:focus ~ .floating-label,
+    input:not(:placeholder-shown) ~ .floating-label {
+      top: -13px;
+      left: 38px;
+      font-size: 0.86em;
+      color: #a66cff;
+      opacity: 1;
+      background: #1a1a2e;
+      padding: 0 7px;
+      border-radius: 4px;
+      box-shadow: 0 1px 4px #00ffff22;
+    }
+    input[type="text"], input[type="number"] {
+      width: 85%;
+      padding: 15px 13px 15px 40px;
+      border: 1.5px solid #302b63;
+      border-radius: 10px;
+      background: #23243aee;
+      color: #cfd9ff;
+      font-size: 16px;
+      margin: 0;
+      box-shadow: 0 1.5px 6px #00ffff33;
+      transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+      outline: none;
+      position: relative;
+      z-index: 1;
+    }
+    input[type="text"]:focus, input[type="number"]:focus {
+      border-color: #00ffff;
+      box-shadow: 0 0 10px #00ffff99;
+      background: #18192b;
+    }
+    input[type="text"]::placeholder, input[type="number"]::placeholder {
+      color: transparent;
+    }
+
+    /* Neon Glowing Button with Ripple */
+    button {
       width: 100%;
-      padding: 12px;
-      margin: 12px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-
-    input[type="text"]:focus,
-    input[type="number"]:focus {
-      border-color: #66a6ff;
-      box-shadow: 0 0 5px rgba(102, 166, 255, 0.5);
+      padding: 15px 0;
+      margin-top: 12px;
+      background: linear-gradient(90deg, #00ffff 90%);
+      color: #23243a;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 18px #00ffff55, 0 0 0 #a66cff;
+      transition: background 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
+      letter-spacing: 0.6px;
+      position: relative;
+      overflow: hidden;
       outline: none;
     }
-
-    button {
-      padding: 12px 25px;
-      background: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background 0.3s ease;
+    
+    button:before {
+      content: '';
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 300%;
+      height: 300%;
+      background: radial-gradient(circle, #00ffff55 0%, transparent 70%);
+      opacity: 0.7;
+      transition: transform 0.5s cubic-bezier(.4,1.2,.6,1);
+      z-index: 0;
     }
+    button:active:before {
+      transform: translate(-50%, -50%) scale(1);
+      transition: 0s;
+    }
+    
 
-    button:hover {
-      background: #0056b3;
+    /* Responsive */
+    @media (max-width: 400px) {
+      .container { padding: 22px 5px; width: 98vw;}
+      h2 { font-size: 1.3rem;}
     }
   </style>
 </head>
@@ -72,42 +170,47 @@
       <input type="text" name="name" placeholder="Full Name" required>
       <input type="text" name="city" placeholder="City" required>
       <input type="text" name="state" placeholder="State" required>
-      <!-- Changed type to text and added id for Aadhaar -->
       <input type="text" name="aadhar" id="aadhar" placeholder="Aadhaar Number" required maxlength="12" pattern="[2-9][0-9]{11}">
+      <button type="submit">Register</button>
+    <form action="save.php" method="POST" id="registrationForm" autocomplete="on">
+      <div class="form-group">
+        <span class="material-icons form-icon">person</span>
+        <input type="text" name="name" placeholder="Full Name" required autocomplete="name" id="name">
+        <label class="floating-label" for="name">Full Name</label>
+      </div>
+      <div class="form-group">
+        <span class="material-icons form-icon">location_city</span>
+        <input type="text" name="city" placeholder="City" required autocomplete="address-level2" id="city">
+        <label class="floating-label" for="city">City</label>
+      </div>
+      <div class="form-group">
+        <span class="material-icons form-icon">public</span>
+        <input type="text" name="state" placeholder="State" required autocomplete="address-level1" id="state">
+        <label class="floating-label" for="state">State</label>
+      </div>
+      <div class="form-group">
+        <span class="material-icons form-icon">credit_card</span>
+        <input type="number" name="aadhar" placeholder="Aadhar Number" required autocomplete="off" id="aadhar">
+        <label class="floating-label" for="aadhar">Aadhar Number</label>
+      </div>
       <button type="submit">Register</button>
     </form>
   </div>
-
   <script>
     document.getElementById('registrationForm').onsubmit = function(event) {
-      // Aadhaar validation
-      var aadhar = document.getElementById('aadhar').value.trim();
-      var aadhaarPattern = /^[2-9][0-9]{11}$/;
-
-      if (!aadhaarPattern.test(aadhar)) {
-        alert("Invalid Aadhaar number. It must be 12 digits and not start with 0 or 1.");
-        document.getElementById('aadhar').focus();
-        event.preventDefault();
-        return false;
-      }
-
-      // Simulate the form submission to save.php (you can replace with actual AJAX if needed)
-      event.preventDefault(); // Prevent the default form submission
-
+      event.preventDefault();
       fetch('save.php', {
         method: 'POST',
         body: new FormData(this)
       })
       .then(response => response.text())
       .then(data => {
-        // After saving the data, redirect to index3.html
-        window.location.href = 'send_otp.php';
+        window.location.href = 'index3.html';
       })
       .catch(error => {
         console.error('Error:', error);
       });
     };
-
   </script>
 </body>
 </html>

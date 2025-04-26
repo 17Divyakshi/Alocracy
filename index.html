@@ -1,67 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Voter Registration (Alocracy)</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=350, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     body {
-      font-family: 'Poppins', 'Roboto', sans-serif;
+      font-family: 'Poppins', 'Orbitron', 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(120deg, #0f0c29, #302b63);
+      background: linear-gradient(120deg, #0f0c29, #24243e, #302b63);
       background-size: cover;
       overflow: hidden;
+      color: #ccd6f6;
     }
 
     .container {
-      background: rgba(26, 26, 46, 0.8);
-      border-radius: 22px;
-      box-shadow: 0 8px 38px #a66cff55, 0 1.5px 6px #00ffff44;
-      width: 355px;
-      padding: 44px 34px 36px 34px;
+      background: rgba(26, 26, 46, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 255, 255, 0.05);
+      width: 350px;
+      padding: 40px 30px 30px;
       text-align: center;
-      position: relative;
-      z-index: 1;
-      backdrop-filter: blur(14px) saturate(140%);
-      border: 1.5px solid #a66cff44;
-      transition: box-shadow 0.3s;
-      animation: fadeInScale 0.8s cubic-bezier(.4,1.2,.6,1);
+      backdrop-filter: blur(12px) saturate(120%);
+      border: 1px solid rgba(100, 100, 255, 0.15);
+      transition: 0.3s;
+      animation: fadeInScale 0.8s cubic-bezier(.4, 1.2, .6, 1);
     }
 
     @keyframes fadeInScale {
-      0% { opacity: 0; transform: scale(0.85);}
-      100% { opacity: 1; transform: scale(1);}
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     h2 {
-      margin-bottom: 28px;
-      color: #00ffff;
+      margin-bottom: 25px;
+      color: #00d9ff;
+      /* Adjusted color */
       font-weight: 700;
-      letter-spacing: 0.7px;
-      font-size: 1.7rem;
-      text-shadow: 0 2px 10px #00ffff33;
+      letter-spacing: 0.6px;
+      font-size: 1.6rem;
+      text-shadow: 0 1px 6px rgba(0, 255, 255, 0.2);
     }
 
     .form-group {
       position: relative;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       text-align: left;
     }
 
     .form-icon {
       position: absolute;
-      left: 13px;
+      left: 12px;
       top: 18px;
-      font-size: 1.2em;
-      color: #00ffffcc;
+      font-size: 1.1em;
+      color: #00d9ff;
+      /* Adjusted color */
       pointer-events: none;
       z-index: 2;
     }
@@ -70,95 +80,85 @@
       position: absolute;
       left: 44px;
       top: 18px;
-      color: #9ee2ff;
+      color: #8ecae6;
       font-size: 1em;
       pointer-events: none;
-      transition: 0.2s;
-      opacity: 0.9;
-      background: transparent;
-      z-index: 2;
+      transition: 0.25s ease;
+      opacity: 0.8;
     }
 
-    input:focus ~ .floating-label,
-    input:not(:placeholder-shown) ~ .floating-label {
-      top: -13px;
+    input:focus~.floating-label,
+    input:not(:placeholder-shown)~.floating-label {
+      top: -12px;
       left: 38px;
-      font-size: 0.86em;
+      font-size: 0.8em;
       color: #a66cff;
-      opacity: 1;
       background: #1a1a2e;
-      padding: 0 7px;
+      padding: 0 6px;
       border-radius: 4px;
-      box-shadow: 0 1px 4px #00ffff22;
+      box-shadow: 0 0 4px rgba(166, 108, 255, 0.25);
     }
 
-    input[type="text"], input[type="number"] {
+    input[type="text"],
+    input[type="number"] {
       width: 85%;
-      padding: 15px 13px 15px 40px;
-      border: 1.5px solid #302b63;
+      padding: 14px 13px 14px 40px;
+      border: 1.5px solid #303150;
       border-radius: 10px;
-      background: #23243aee;
-      color: #cfd9ff;
-      font-size: 16px;
-      margin: 0;
-      box-shadow: 0 1.5px 6px #00ffff33;
+      background: #23243a;
+      color: #e0f2f1;
+      font-size: 15px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
       outline: none;
-      position: relative;
-      z-index: 1;
+      transition: 0.3s;
     }
 
-    input[type="text"]:focus, input[type="number"]:focus {
-      border-color: #00ffff;
-      box-shadow: 0 0 10px #00ffff99;
-      background: #18192b;
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      border-color: #00d9ff;
+      /* Adjusted color */
+      background: #1a1b2d;
     }
 
-    input[type="text"]::placeholder, input[type="number"]::placeholder {
+    input[type="text"]::placeholder,
+    input[type="number"]::placeholder {
       color: transparent;
     }
 
     button {
       width: 100%;
-      padding: 15px 0;
-      margin-top: 12px;
-      background: linear-gradient(90deg, #00ffff 90%);
-      color: #23243a;
+      padding: 14px 0;
+      margin-top: 15px;
+      background: linear-gradient(90deg, #00d9ff, #7f5af0);
+      color: #101522;
       border: none;
       border-radius: 12px;
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 17px;
+      font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 2px 18px #00ffff55, 0 0 0 #a66cff;
+      box-shadow: 0 3px 10px rgba(0, 255, 255, 0.2);
       letter-spacing: 0.6px;
-      position: relative;
-      overflow: hidden;
-      outline: none;
+      transition: 0.3s;
     }
 
-    button:before {
-      content: '';
-      position: absolute;
-      left: 50%; top: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      width: 300%;
-      height: 300%;
-      background: radial-gradient(circle, #00ffff55 0%, transparent 70%);
-      opacity: 0.7;
-      transition: transform 0.5s cubic-bezier(.4,1.2,.6,1);
-      z-index: 0;
-    }
-
-    button:active:before {
-      transform: translate(-50%, -50%) scale(1);
-      transition: 0s;
+    button:hover {
+      background: linear-gradient(90deg, #7f5af0, #00d9ff);
+      box-shadow: 0 4px 12px rgba(166, 108, 255, 0.3);
     }
 
     @media (max-width: 400px) {
-      .container { padding: 22px 5px; width: 98vw;}
-      h2 { font-size: 1.3rem;}
+      .container {
+        padding: 20px 8px;
+        width: 95vw;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h2>Register to Vote</h2>
@@ -180,15 +180,8 @@
       </div>
       <div class="form-group">
         <span class="material-icons form-icon">credit_card</span>
-        <input 
-          type="text" 
-          name="aadhar" 
-          placeholder="Aadhar Number" 
-          required 
-          autocomplete="off" 
-          id="aadhar"
-          pattern="[2-9][0-9]{11}"
-          title="Aadhar number must be 12 digits and must not start with 0 or 1">
+        <input type="text" name="aadhar" placeholder="Aadhar Number" required autocomplete="off" id="aadhar"
+          pattern="[2-9][0-9]{11}" title="Aadhar number must be 12 digits and must not start with 0 or 1">
         <label class="floating-label" for="aadhar">Aadhar Number</label>
       </div>
       <button type="submit">Register</button>
@@ -196,7 +189,7 @@
   </div>
 
   <script>
-    document.getElementById('registrationForm').onsubmit = function(event) {
+    document.getElementById('registrationForm').onsubmit = function (event) {
       event.preventDefault();
 
       const aadhar = document.getElementById('aadhar').value.trim();
@@ -212,14 +205,15 @@
         method: 'POST',
         body: new FormData(this)
       })
-      .then(response => response.text())
-      .then(data => {
-        window.location.href = 'send_otp.php';
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+        .then(response => response.text())
+        .then(data => {
+          window.location.href = 'send_otp.php';
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
     };
   </script>
 </body>
+
 </html>

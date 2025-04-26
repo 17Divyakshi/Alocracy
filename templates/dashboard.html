@@ -1,88 +1,166 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Live Voting Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-        color: #ffffff;
-        margin: 0;
-        padding: 20px;
-    }
+        body {
+            font-family: 'Poppins', 'Roboto', sans-serif;
+            background: linear-gradient(120deg, #101522, #2c3e50, #1f2b38);
+            /* Updated gradient based on first theme */
+            color: #e3e8f5;
+            /* Light text color similar to the first theme */
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
 
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #66fcf1;
-        text-shadow: 0 0 5px #45a29e;
-    }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00d9ff;
+            /* Changed heading color to match first theme */
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+            /* Lighten the glow with theme color */
+            font-weight: 700;
+            letter-spacing: 0.8px;
+        }
 
-    .summary {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-    }
+        .summary {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
 
-    .box {
-        padding: 15px 25px;
-        border-radius: 10px;
-        background-color: #1f2833;
-        box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
-        text-align: center;
-        min-width: 140px;
-        font-size: 16px;
-        font-weight: bold;
-        color: #ffffff;
-    }
+        .box {
+            padding: 20px 25px;
+            border-radius: 12px;
+            background: rgba(35, 36, 58, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 255, 255, 0.1), 0 4px 12px rgba(130, 104, 255, 0.1);
+            /* Updated shadow */
+            text-align: center;
+            width: 180px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #e3e8f5;
+            /* Light text color */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
 
-    .bjp { background-color: #ffcc00; color: #000; }
-    .congress { background-color: #1e90ff; color: #fff; }
-    .aap { background-color: #00bcd4; color: #fff; }
-    .others { background-color: #8e44ad; color: #fff; }
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.15), 0 6px 18px rgba(130, 104, 255, 0.1);
+        }
 
-    .charts {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-    }
+        .bjp {
+            background: rgba(255, 204, 0, 0.85);
+            color: #1a1a1a;
+        }
 
-    .chart-card {
-        background: #1f2833;
-        padding: 15px;
-        border-radius: 12px;
-        box-shadow: 0 0 12px rgba(102, 252, 241, 0.15);
-        width: 600px;
-        max-width: 90%;
-        color: #fff;
-    }
+        .congress {
+            background: rgba(30, 144, 255, 0.85);
+            color: #e3e8f5;
+            /* Light text color */
+        }
 
-    canvas {
-        width: 100% !important;
-        height: 400px !important;
-    }
+        .aap {
+            background: rgba(0, 188, 212, 0.85);
+            color: #e3e8f5;
+            /* Light text color */
+        }
 
-    .donut-card canvas {
-        height: 500px !important;
-    }
+        .others {
+            background: rgba(142, 68, 173, 0.85);
+            color: #e3e8f5;
+            /* Light text color */
+        }
 
-    #partyChartCard {
-        max-width: 400px;
-    }
+        .charts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
 
+        .chart-card {
+            background: rgba(35, 36, 58, 0.95);
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.1), 0 6px 18px rgba(166, 108, 255, 0.1);
+            width: 600px;
+            /* Fixed width for consistency */
+            height: 400px;
+            /* Fixed height for consistency */
+            max-width: 100%;
+            color: #ffffff;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .chart-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.1), 0 8px 25px rgba(166, 108, 255, 0.1);
+        }
+
+        canvas {
+            width: 100% !important;
+            /* Ensure canvas fills the container */
+            height: 100% !important;
+            /* Ensure canvas height is consistent with the container */
+        }
+
+        .donut-card canvas {
+            height: 100% !important;
+            /* Adjust height for donut chart */
+        }
+
+        #partyChartCard {
+            max-width: 600px;
+            /* Fixed width for party chart */
+            width: 100%;
+            height: 400px;
+        }
+
+
+        .voting-box {
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(35, 36, 58, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 255, 255, 0.1), 0 4px 12px rgba(130, 104, 255, 0.1);
+            text-align: center;
+            width: 180px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #e3e8f5;
+            /* Light text color */
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 15px;
+        }
+
+        .voting-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.15), 0 6px 18px rgba(130, 104, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .chart-card {
+                width: 100%;
+                height: 300px;
+                /* Adjust height for smaller screens */
+            }
+        }
     </style>
 </head>
+
 <body>
     <h1>Live Voting Dashboard</h1>
     <div class="card mt-4">
         <h5>Insights Summary</h5>
         <div id="insights">Loading insights...</div> <!-- 👈 This id must match -->
-      </div>
-      
+    </div>
+
 
     <div class="summary">
         <div class="box bjp" id="bjpBox">BJP: 0</div>
@@ -111,30 +189,30 @@
             <h3 style="text-align:center;">Vote Share by Party</h3>
             <canvas id="partyChart"></canvas>
         </div>
-        
-        
+
+
     </div>
 
     <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    fetch('/data')
-      .then(response => response.json())
-      .then(data => {
-        const insightsBox = document.getElementById("insights");
-        if (insightsBox) {
-          if (data.insights && data.insights.length > 0) {
-            insightsBox.innerHTML = data.insights.map(i => `💡 ${i}`).join("<br>");
-          } else {
-            insightsBox.innerHTML = "No insights available yet.";
-          }
-        } else {
-          console.warn("No element with ID 'insights' found!");
-        }
-      });
-  });
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    const insightsBox = document.getElementById("insights");
+                    if (insightsBox) {
+                        if (data.insights && data.insights.length > 0) {
+                            insightsBox.innerHTML = data.insights.map(i => `💡 ${i}`).join("<br>");
+                        } else {
+                            insightsBox.innerHTML = "No insights available yet.";
+                        }
+                    } else {
+                        console.warn("No element with ID 'insights' found!");
+                    }
+                });
+        });
 
 
-        let stateChart, cityChart,partyChart;
+        let stateChart, cityChart, partyChart;
 
         async function fetchData() {
             const res = await fetch('/data');
@@ -170,16 +248,16 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-            legend: {
-                labels: {
-                    color: '#333',
-                    font: {
-                        size: 14,
-                        weight: 'bold'
-                    }
-                }
-            }
-        },
+                        legend: {
+                            labels: {
+                                color: '#333',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    },
                 }
             });
 
@@ -201,41 +279,42 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-            legend: {
-                labels: {
-                    color: '#333',
-                    font: {
-                        size: 14,
-                        weight: 'bold'
+                        legend: {
+                            labels: {
+                                color: '#333',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#555'
+                            },
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#555'
+                            },
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            }
+                        }
+                    },
+                    elements: {
+                        bar: {
+                            borderRadius: 6
+                        }
                     }
                 }
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: '#555'
-                },
-                grid: {
-                    color: 'rgba(0,0,0,0.05)'
-                }
-            },
-            y: {
-                ticks: {
-                    color: '#555'
-                },
-                grid: {
-                    color: 'rgba(0,0,0,0.1)'
-                }
-            }
-        },
-        elements: {
-            bar: {
-                borderRadius: 6
-            }}
-                }
             });
-        
+
             const partyLabels = Object.keys(data.party_counts);
             const partyData = Object.values(data.party_counts);
             const partyColors = ['#f39c12', '#2980b9', '#27ae60', '#7f8c8d'];
@@ -266,4 +345,5 @@
         setInterval(fetchData, 30000);
     </script>
 </body>
+
 </html>

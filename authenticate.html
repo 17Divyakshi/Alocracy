@@ -13,34 +13,44 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      color: #e0e0e0;
+      color: #e3e8f5;
     }
 
     .container {
       background: #121829;
       padding: 40px;
       border-radius: 16px;
-      box-shadow: 0 0 10px #00f0ff;
+      box-shadow: 0 0 8px #66e5ff;
       text-align: center;
       width: 350px;
-      border: 2px solid #00f0ff;
+      border: 2px solid #66e5ff;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
     h2 {
       margin-bottom: 20px;
-      color: #4ab8c0;
-      text-shadow: 0 0 5px #5cecf6be;
+      color: #66e5ff;
+      text-shadow: 0 0 6px #66e5ff;
+      font-family: 'Orbitron', sans-serif;
     }
 
     input[type="text"] {
       width: 95%;
       padding: 12px;
       margin-bottom: 20px;
-      border: 1px solid #00f0ff;
+      border: 1px solid #66e5ff;
       border-radius: 10px;
       background: #0f1624;
-      color: #ffffff;
+      color: #e3e8f5;
       font-size: 16px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #66e5ff;
+      box-shadow: 0 0 6px #66e5ff;
+      outline: none;
+      background: #192334;
     }
 
     input[type="text"]::placeholder {
@@ -48,22 +58,25 @@
     }
 
     button {
-      background-color: #00f0ff;
+      background-color: #66e5ff;
       color: #0a0f1a;
       border: none;
-      padding: 10px 25px;
+      padding: 12px 30px;
       font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
-      transition: 0.3s ease;
-      box-shadow: 0 0 10px #00eeffce;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 10px #66e5ff88;
+      font-weight: bold;
     }
 
     button:hover {
-      background-color: #00bbd483;
-      box-shadow: 0 0 15px #00eaffd6, 0 0 25px #00eaffd3;
+      background-color: #4dcde5;
+      transform: translateY(-2px);
+      box-shadow: 0 0 12px #4dcde588, 0 0 18px #66e5ff99;
     }
-  </style>
+</style>
+
 </head>
 
 <body>

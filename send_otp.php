@@ -8,25 +8,22 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
-// If form is submitted to send OTP
 if (isset($_POST['email'])) {
-    // Send OTP part
-    $email = $_POST['email'];
-    $_SESSION['email'] = $email;  // Store email in session
     
-    $otp = rand(100000, 999999);  // Generate OTP
+    $email = $_POST['email'];
+    $_SESSION['email'] = $email; 
+    
+    $otp = rand(100000, 999999);  
 
-    // Store OTP in session
     $_SESSION['otp'] = $otp;  
 
-    // Send OTP via PHPMailer (use the code you already have)
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'vaibhavijha92@gmail.com';  // Replace with your email
-        $mail->Password = 'ptsorhjsmpratbho';  // Replace with your app password
+        $mail->Username = 'vaibhavijha92@gmail.com'; 
+        $mail->Password = 'ptsorhjsmpratbho';  
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 

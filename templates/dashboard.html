@@ -90,13 +90,14 @@
             padding: 20px;
             border-radius: 14px;
             box-shadow: 0 4px 15px rgba(0, 255, 255, 0.1), 0 6px 18px rgba(166, 108, 255, 0.1);
-            width: 600px;
+            width:600px;
             /* Fixed width for consistency */
             height: 400px;
             /* Fixed height for consistency */
             max-width: 100%;
             color: #ffffff;
             transition: box-shadow 0.3s, transform 0.3s;
+            position: relative;
         }
 
         .chart-card:hover {
@@ -121,6 +122,10 @@
             /* Fixed width for party chart */
             width: 100%;
             height: 400px;
+        }
+        #partyChart{
+            height: 600px;
+            width:100%;
         }
 
 
@@ -151,15 +156,13 @@
                 /* Adjust height for smaller screens */
             }
         }
+        
     </style>
 </head>
 
 <body>
     <h1>Live Voting Dashboard</h1>
-    <div class="card mt-4">
-        <h5>Insights Summary</h5>
-        <div id="insights">Loading insights...</div> <!-- 👈 This id must match -->
-    </div>
+    
 
 
     <div class="summary">
@@ -173,7 +176,10 @@
         <div class="box" id="totalVotes">Total Votes: 0</div>
         <div class="box" id="uniqueVoters">Unique Voters: 0</div>
     </div>
-
+    <div class="card mt-4">
+        <h5>Insights Summary</h5>
+        <div id="insights">Loading insights...</div> <!-- 👈 This id must match -->
+    </div>
     <div class="charts">
         <div class="chart-card">
             <h3 style="text-align:center;">Votes by State</h3>
@@ -245,6 +251,9 @@
                     }]
                 },
                 options: {
+                    layout: {
+        padding: 45  // 👈 reduce padding inside chart
+    },
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
@@ -276,6 +285,9 @@
                     }]
                 },
                 options: {
+                    layout: {
+        padding: 45  // 👈 reduce padding inside chart
+    },
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
@@ -292,7 +304,7 @@
                     scales: {
                         x: {
                             ticks: {
-                                color: '#555'
+                                color: 'rgb(240, 240, 240)'
                             },
                             grid: {
                                 color: 'rgba(0,0,0,0.05)'
@@ -300,7 +312,7 @@
                         },
                         y: {
                             ticks: {
-                                color: '#555'
+                                color: 'rgb(240, 240, 240)'
                             },
                             grid: {
                                 color: 'rgba(0,0,0,0.1)'
@@ -330,6 +342,9 @@
                     }]
                 },
                 options: {
+                    layout: {
+        padding: 45// 👈 reduce padding inside chart
+    },
                     plugins: {
                         title: {
                             display: true,

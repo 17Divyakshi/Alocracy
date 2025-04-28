@@ -16,6 +16,8 @@ if (isset($_POST['email'])) {
     $otp = rand(100000, 999999);  
 
     $_SESSION['otp'] = $otp;  
+    $_SESSION['otp_created_time'] = time(); 
+
 
     $mail = new PHPMailer(true);
     try {
@@ -120,12 +122,23 @@ input[type="submit"]:hover {
 .container input[type="submit"]::first-letter {
     text-transform: uppercase;
 }
+.note {
+    color: #00d9ff;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 5px rgba(0, 255, 255, 0.3);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
    
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Send OTP</h2>
+        <p class="note">Note: OTP will expire in 120 seconds.</p>
+
         <form action="send_otp.php" method="POST">
             <input type="email" name="email" placeholder=" Enter your email" required>
             <input type="submit" value="Send OTP">

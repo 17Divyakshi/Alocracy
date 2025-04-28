@@ -6,17 +6,27 @@ ini_set('display_errors', 1);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $entered_otp = $_POST['otp'];
 
-    if (isset($_SESSION['otp'])) {
-        if ($entered_otp == $_SESSION['otp']) {
-            
+    if (isset($_SESSION['otp']) && isset($_SESSION['otp_created_time'])) {
+
+        $otp_valid_duration = 120; // 5 minutes = 300 seconds
+    
+        if (time() - $_SESSION['otp_created_time'] > $otp_valid_duration) {
+            $error = "OTP expired. Please request a new one.";
+            unset($_SESSION['otp']);
+            unset($_SESSION['otp_created_time']);
+        } elseif ($entered_otp == $_SESSION['otp']) {
+            // OTP is correct and within time
+            unset($_SESSION['otp']);
+            unset($_SESSION['otp_created_time']);
             header("Location: index3.html");
             exit();
         } else {
-            $error = "Invalid or expired OTP.";
+            $error = "Invalid OTP. Please try again.";
         }
     } else {
         $error = "OTP session expired or not set.";
     }
+    
 }
 ?>
 

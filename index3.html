@@ -1,74 +1,290 @@
 <!DOCTYPE html>
- <html lang="en">
- <head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-   <title>Face Authentication</title>
-   <link rel="stylesheet" href="style.css" />
-   <style>
-     body {
-       font-family: Arial, sans-serif;
-       background: linear-gradient(to right, #89f7fe, #66a6ff);
-       padding: 20px;
-       text-align: center;
-     }
- 
-     h2 {
-       color: #333;
-     }
- 
-     input[type="file"],
-     button {
-       margin: 10px;
-       padding: 10px 15px;
-       border: none;
-       border-radius: 8px;
-       font-size: 16px;
-       cursor: pointer;
-     }
- 
-     button {
-       background-color: #007bff;
-       color: white;
-     }
- 
-     button:hover {
-       background-color: #0056b3;
-     }
- 
-     #proceedBtn {
-       background-color: #28a745;
-       display: none;
-     }
- 
-     #proceedBtn:hover {
-       background-color: #218838;
-     }
- 
-     video {
-       border-radius: 8px;
-       margin-top: 15px;
-     }
- 
-     p {
-       font-weight: bold;
-     }
-   </style>
- </head>
- <body>
-   <h2>Upload Voter ID</h2>
-   <input type="file" id="voterIDUpload" />
-   <button id="uploadBtn">Upload</button>
-   <p id="uploadStatus"></p>
- 
-   <h2>Live Camera</h2>
-   <video id="video" width="640" height="480" autoplay></video>
-   <button id="authBtn">Authenticate</button>
-   <p id="auth-status"></p>
- 
-   <button id="proceedBtn">Proceed to Voting</button>
- 
-   <script src="script.js"></script>
- </body>
- </html>
- 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Face Authentication</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background: linear-gradient(90deg, #121826 60%, #1c2533 100%);
+  color: #e3e8f5;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-navbar {
+  width: 100vw;
+  background: linear-gradient(90deg, #242d36 60%, #39424c 100%);
+  color: #00d9ff;
+  box-shadow: 0 2px 18px #232b3388, 0 1.5px 0 #00d9ff22 inset;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  padding: 0;
+  margin-bottom: 38px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  height: 62px;
+}
+
+.navbar-title {
+  font-size: 1.7rem;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #00d9ff;
+  margin-left: 38px;
+  text-shadow: 0 2px 8px #23294688, 0 1px 0 #00d9ff;
+  line-height: 1;
+}
+@media (max-width: 700px) {
+  .main-navbar {
+    height: 48px;
+    border-radius: 0 0 14px 14px;
+  }
+  .navbar-title {
+    font-size: 1.1rem;
+    margin-left: 18px;
+  }
+}
+body {
+  padding-top: 70px;
+}
+.auth-flex-container {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px 20px;
+}
+
+.auth-section {
+  flex: 1;
+  background: #1c2533;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px #00d9ff22;
+  padding: 32px 28px;
+  min-width: 0;
+  min-height: 550px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.section-icon {
+  font-size: 2.1rem;
+  margin-bottom: 6px;
+  color: #ffefc0;
+  display: block;
+}
+
+.auth-section h2 {
+  color: #00d9ff;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  text-align: center;
+  width: 100%;
+  font-weight: 700;
+  font-size: 1.35rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-section h2::after {
+  content: "";
+  display: block;
+  margin: 8px auto 0 auto;
+  width: 60%;
+  border-bottom: 2.5px solid #00d9ff;
+  opacity: 0.7;
+}
+
+.input-box {
+  border: 1.5px solid #00d9ff;
+  background: #232946;
+  border-radius: 8px;
+  padding: 18px 18px 18px 18px;
+  margin: 18px 0 24px 0;
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.auth-section input[type="file"] {
+  padding: 8px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  background: transparent;
+  color: #e3e8f5;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  display: block;
+}
+
+.auth-section input[type="file"]:focus {
+  outline: none;
+}
+
+.auth-section button {
+  padding: 12px 26px;
+  border: none;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(90deg, #00d9ff, #8268ff 90%);
+  color: #f1f3f7;
+  box-shadow: 0 2px 12px #00d9ff44;
+  transition: 0.4s;
+  outline: none;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto 0 auto;
+  display: block;
+}
+
+.auth-section button:hover
+.auth-section button:focus {
+  background: linear-gradient(90deg, #8268ff, #00d9ff 90%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+}
+
+#authBtn {
+  margin-top: 24px;
+  background: linear-gradient(90deg, #8268ff, #00d9ff 90%);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 12px #f43f5e44;
+}
+
+#authBtn:hover,
+#authBtn:focus {
+  background: linear-gradient(90deg, #8268ff ,#00d9ff 90%);
+  color: #fff;
+}
+
+
+#proceedBtn {
+  background: linear-gradient(90deg, #00d9ff, #28e1a7 90%);
+  color: #121826;
+  display: none;
+  font-weight: 700;
+  margin-top: 18px;
+}
+
+#proceedBtn:hover,
+#proceedBtn:focus {
+  background: linear-gradient(90deg, #00d9ff 90%);
+  color: #fff;
+}
+
+video {
+  border-radius: 14px;
+  margin-top: 18px;
+  background: #232946;
+  box-shadow: 0 4px 32px #8268ff44, 0 0 0 3px #00d9ff55;
+  border: 2.5px solid #00d9ff;
+  width: 100%;
+  max-width: 320px;
+  transition: 0.3s;
+  flex-shrink: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+video:hover,
+video:focus {
+  box-shadow: 0 8px 40px #00d9ff88, 0 0 0 4px #8268ff99;
+}
+
+p#uploadStatus,
+p#auth-status {
+  font-weight: bold;
+  margin-top: 12px;
+  color: #ff9f43;
+  text-shadow: 0 0 4px #1c2533;
+  letter-spacing: 0.5px;
+}
+
+
+@media (max-width: 950px) {
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .auth-flex-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0;
+    gap: 24px;
+  }
+  .auth-section {
+    padding: 20px;
+    min-height: 400px;
+    max-width: 95vw;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .input-box,
+  .auth-section button,
+  .auth-section video {
+    max-width: 95vw;
+  }
+}
+  </style>
+</head>
+<body>
+  <nav class="main-navbar">
+    <span class="navbar-title">Alocracy- Voter Authentication</span>
+  </nav>
+  
+  
+  <div class="auth-flex-container">
+    <div class="auth-section">
+      <span class="section-icon">🪪</span>
+      <h2>Upload Voter ID</h2>
+      <div class="input-box">
+        <input type="file" id="voterIDUpload" />
+      </div>
+      <button id="uploadBtn">Upload</button>
+      <p id="uploadStatus"></p>
+    </div>
+    <div class="auth-section">
+      <span class="section-icon">📷</span>
+      <h2>Live Camera</h2>
+      <video id="video" width="320" height="240" autoplay></video>                   
+      <button id="authBtn">Authenticate</button>
+      <p id="auth-status"></p>
+      <button id="proceedBtn">Proceed to Voting</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html> 
+

@@ -55,10 +55,7 @@ def get_data():
 
     # --- 🧠 Generate Insights ---
     insights = []
-    
-    if party_counts:
-     top_party, top_votes = party_counts.most_common(1)[0]
-     insights.append(f"{top_party} is currently leading overall with {top_votes} vote(s).")
+
     # 1. Leading party across states
     state_party_map = {}  # state -> party counter
     for row in vote_data:
@@ -79,12 +76,17 @@ def get_data():
         leading_party, lead_count = party_leads.most_common(1)[0]
         insights.append(f"{leading_party} is leading in {lead_count} states.")
 
-    # 2. City with most votes
+    # 2. Leading party overall 🆕
+    if party_counts:
+        overall_leading_party, overall_votes = party_counts.most_common(1)[0]
+        insights.append(f"Leading party overall is {overall_leading_party} ({overall_votes} votes).")
+
+    # 3. City with most votes
     if city_counts:
         top_city, top_votes = city_counts.most_common(1)[0]
         insights.append(f"Most votes are coming from {top_city} ({top_votes} votes).")
 
-    # 3. Fallback if no insights found
+    # 4. Fallback if no insights found
     if not insights:
         insights.append("Waiting for more votes to generate insights.")
 
@@ -102,4 +104,9 @@ def get_data():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+
 

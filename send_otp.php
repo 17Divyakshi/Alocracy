@@ -16,6 +16,8 @@ if (isset($_POST['email'])) {
     $otp = rand(100000, 999999);  
 
     $_SESSION['otp'] = $otp;  
+    $_SESSION['otp_created_time'] = time(); 
+
 
     $mail = new PHPMailer(true);
     try {

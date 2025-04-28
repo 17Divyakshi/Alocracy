@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>Voter Registration</title>
@@ -155,11 +154,10 @@
     }
   </style>
 </head>
-
 <body>
   <div class="container">
     <h2>Register to Vote</h2>
-    <form id="registrationForm" autocomplete="on">
+    <form id="registrationForm" action="save.php" method="POST" autocomplete="on">
       <div class="form-group">
         <span class="material-icons form-icon">person</span>
         <input type="text" name="name" placeholder="Full Name" required autocomplete="name" id="name">
@@ -187,30 +185,17 @@
 
   <script>
     document.getElementById('registrationForm').onsubmit = function (event) {
-      event.preventDefault();
-
       const aadhar = document.getElementById('aadhar').value.trim();
       const aadharPattern = /^[2-9][0-9]{11}$/;
 
       if (!aadharPattern.test(aadhar)) {
         alert("Please enter a valid Aadhar number:\n- 12 digits only\n- Cannot start with 0 or 1.");
+        event.preventDefault();
         return false;
       }
 
-     // If valid, send form
-     fetch('save.php', {
-      method: 'POST',
-      body: new FormData(this)
-      })
-       .then(response => response.text())
-        .then(data => {
-          window.location.href = 'send_otp.php';
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+     // If valid, the form will submit to save.php
     };
   </script>
 </body>
-
 </html>

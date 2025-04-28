@@ -13,8 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     }
-
     fclose($file);
-    echo "Aadhar not found. Please register first.";
+    echo "Aadhar number not found or invalid.";
 }
 ?>

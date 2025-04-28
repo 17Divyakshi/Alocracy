@@ -121,4 +121,3 @@ if (!isset($_SESSION['aadhar'])) {
   </script>
 </body>
 </html>
-

@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($alreadyVoted) {
         // If already voted, prevent registration and show a message
-        echo "<h2 style='color: red; text-align: center;'>A vote has already been recorded with that Aadhar numeber.</h2>";
+        echo "<h2 style='color: red; text-align: center;'>A vote has already been recorded with that Aadhar number.</h2>";
     } else {
         // If not voted, register the user
         $name = $_POST['name'];

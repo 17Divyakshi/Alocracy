@@ -1,219 +1,701 @@
 <!DOCTYPE html>
-<html lang="en">
+p<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Voter Registration (Alocracy)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=350, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&family=Poppins:wght@400;600&display=swap"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', 'Orbitron', 'Roboto', sans-serif;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(120deg, #0f0c29, #24243e, #302b63);
-      background-size: cover;
-      overflow: hidden;
-      color: #ccd6f6;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Alocracy-Online Voting System</title>
 
-    .container {
-      background: rgba(26, 26, 46, 0.9);
-      border-radius: 20px;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 255, 255, 0.05);
-      width: 350px;
-      padding: 40px 30px 30px;
-      text-align: center;
-      backdrop-filter: blur(12px) saturate(120%);
-      border: 1px solid rgba(100, 100, 255, 0.15);
-      transition: 0.3s;
-      animation: fadeInScale 0.8s cubic-bezier(.4, 1.2, .6, 1);
-    }
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600&display=swap" rel="stylesheet" />
 
-    @keyframes fadeInScale {
-      0% {
-        opacity: 0;
-        transform: scale(0.9);
-      }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
 
-    h2 {
-      margin-bottom: 25px;
-      color: #00d9ff;
-      /* Adjusted color */
-      font-weight: 700;
-      letter-spacing: 0.6px;
-      font-size: 1.6rem;
-      text-shadow: 0 1px 6px rgba(0, 255, 255, 0.2);
-    }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #121826;
+            color: #e3e8f5;
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
 
-    .form-group {
-      position: relative;
-      margin-bottom: 24px;
-      text-align: left;
-    }
+        a {
+            text-decoration: none;
+        }
 
-    .form-icon {
-      position: absolute;
-      left: 12px;
-      top: 18px;
-      font-size: 1.1em;
-      color: #00d9ff;
-      /* Adjusted color */
-      pointer-events: none;
-      z-index: 2;
-    }
+        .navbar {
+            background: linear-gradient(90deg, #101522, #2c3e50, #1f2b38);
+            padding: 15px 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    .floating-label {
-      position: absolute;
-      left: 44px;
-      top: 18px;
-      color: #8ecae6;
-      font-size: 1em;
-      pointer-events: none;
-      transition: 0.25s ease;
-      opacity: 0.8;
-    }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            justify-content: space-between;
+        }
 
-    input:focus~.floating-label,
-    input:not(:placeholder-shown)~.floating-label {
-      top: -12px;
-      left: 38px;
-      font-size: 0.8em;
-      color: #a66cff;
-      background: #1a1a2e;
-      padding: 0 6px;
-      border-radius: 4px;
-      box-shadow: 0 0 4px rgba(166, 108, 255, 0.25);
-    }
+        .logo-area {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 40px;
+        }
 
-    input[type="text"],
-    input[type="number"] {
-      width: 85%;
-      padding: 14px 13px 14px 40px;
-      border: 1.5px solid #303150;
-      border-radius: 10px;
-      background: #23243a;
-      color: #e0f2f1;
-      font-size: 15px;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
-      outline: none;
-      transition: 0.3s;
-    }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: linear-gradient (90deg #6cd5ff, #b585f1);
+            font-family: 'Orbitron', sans-serif;
+            user-select: none;
+        }
 
-    input[type="text"]:focus,
-    input[type="number"]:focus {
-      border-color: #00d9ff;
-      /* Adjusted color */
-      background: #1a1b2d;
-    }
+        .slogan {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #9ee2ff;
+            margin-top: 4px;
+            user-select: none;
+        }
 
-    input[type="text"]::placeholder,
-    input[type="number"]::placeholder {
-      color: transparent;
-    }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
 
-    button {
-      width: 100%;
-      padding: 14px 0;
-      margin-top: 15px;
-      background: linear-gradient(90deg, #00d9ff, #7f5af0);
-      color: #101522;
-      border: none;
-      border-radius: 12px;
-      font-size: 17px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 3px 10px rgba(0, 255, 255, 0.2);
-      letter-spacing: 0.6px;
-      transition: 0.3s;
-    }
+        .nav-links li a {
+            text-decoration: none;
+            font-size: 1rem;
+            color: #e3e8f5;
+            transition: color 0.3s ease;
+            position: relative;
+            user-select: none;
+        }
 
-    button:hover {
-      background: linear-gradient(90deg, #7f5af0, #00d9ff);
-      box-shadow: 0 4px 12px rgba(166, 108, 255, 0.3);
-    }
+        .nav-links li a::after {
+            content: "";
+            display: block;
+            width: 0%;
+            height: 2px;
+            background: #00d9ff;
+            transition: width 0.3s ease;
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            border-radius: 2px;
+        }
 
-    @media (max-width: 400px) {
-      .container {
-        padding: 20px 8px;
-        width: 95vw;
-      }
+        .nav-links li a:hover {
+            color: #00d9ff;
+        }
 
-      h2 {
-        font-size: 1.4rem;
-      }
-    }
-  </style>
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        .light-mode-toggle {
+            background: none;
+            border: none;
+            color: #e3e8f5;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0;
+            transition: color 0.3s ease;
+            user-select: none;
+            margin-left: 20px;
+        }
+
+        .light-mode-toggle:hover {
+            color: #00d9ff;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 100px 20px 50px;
+            color: #ffffff;
+            background: #1f2b38e0;
+            background-image: url('imgbg.png');
+            background-size: contain;
+            background-blend-mode: multiply;
+            min-height: 50vh;
+            margin-top: 90px;
+            user-select: none;
+        }
+
+        .hero-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-section .cta-btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: #0a0a0a;
+            background: #00d9ff;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 217, 255, 0.4);
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            user-select: none;
+        }
+
+        .hero-section .cta-btn:hover {
+            background: #00a9c9;
+            transform: translateY(-2px);
+        }
+
+        .features-section {
+            padding: 50px 20px;
+            text-align: center;
+            background: #101522;
+        }
+
+        .features-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #00d9ff;
+            user-select: none;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .feature-box {
+            width: 300px;
+            background: #1c2533;
+            color: #e3e8f5;
+            box-shadow: 0 4px 10px rgba(130, 104, 255, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            user-select: none;
+        }
+
+        .feature-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-box h3 {
+            margin-bottom: 10px;
+            color: #8268ff;
+        }
+
+        .feature-box p {
+            font-size: 1rem;
+        }
+
+        .feature-box .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #00d9ff;
+        }
+
+        .slider-container {
+            width: 100%;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            perspective: 1200px;
+            margin-top: 20px;
+            background: linear-gradient(180deg, #1c2533, #121826);
+            color: #fff;
+        }
+
+        .slider {
+            display: flex;
+            transform-style: preserve-3d;
+            animation: spread-and-return 10s linear 1;
+        }
+
+        .slider img {
+            width: 180px;
+            height: 250px;
+            margin: 0 15px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(130, 104, 255, 0.2);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+
+        .slider img:nth-child(1) {
+            transform: rotateY(-40deg) translateZ(-180px);
+        }
+
+        .slider img:nth-child(2) {
+            transform: rotateY(-20deg) translateZ(-120px);
+        }
+
+        .slider img:nth-child(3) {
+            transform: rotateY(0deg) translateZ(0px);
+        }
+
+        .slider img:nth-child(4) {
+            transform: rotateY(20deg) translateZ(-120px);
+        }
+
+        .slider img:nth-child(5) {
+            transform: rotateY(40deg) translateZ(-180px);
+        }
+
+        .slider img:hover {
+            transform: scale(1.1) translateY(-20px);
+            box-shadow: 0 15px 40px rgba(130, 104, 255, 0.4);
+        }
+
+        @keyframes spread-and-return {
+            0% {
+                transform: rotateY(0deg);
+            }
+
+            50% {
+                transform: rotateY(0deg) translateZ(100px);
+            }
+
+            100% {
+                transform: rotateY(0deg);
+            }
+        }
+
+        .slider-container:hover .slider {
+            animation-play-state: paused;
+        }
+
+        .testimonials-section {
+            padding: 50px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, #1c2533, #121826);
+            user-select: none;
+        }
+
+        .testimonials-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #00d9ff;
+        }
+
+        .testimonial {
+            display: flex;
+            align-items: center;
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+            background: #101522;
+            border-radius: 10px;
+            border: 2px solid #00d9ff;
+            box-shadow: 0 0 10px #00d9ff;
+        }
+
+        .testimonial-pic {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin-right: 20px;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            font-size: 1.2em;
+            color: #e3e8f5;
+        }
+
+        .testimonial span {
+            display: block;
+            margin-top: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ff9f43;
+        }
+
+        .rating {
+            color: gold;
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        .feedback-section {
+            background-color: #1c2533;
+            padding: 30px 20px;
+            border-radius: 10px;
+            margin: 40px auto 40px auto;
+            max-width: 600px;
+            color: #e3e8f5;
+            position: relative;
+        }
+
+        .feedback-section h2 {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #00d9ff;
+        }
+
+        .feedback-section p {
+            text-align: center;
+            font-size: 1.1em;
+            color: #b0c4ff;
+            margin-bottom: 30px;
+        }
+
+        .feedback-field {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .feedback-section label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: block;
+            color: #8268ff;
+        }
+
+        .feedback-section input[type="text"],
+        .feedback-section input[type="email"],
+        .feedback-section textarea,
+        .feedback-section select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #121826;
+            color: #e3e8f5;
+            font-size: 1rem;
+            box-sizing: border-box;
+            text-align: left;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feedback-section input[type="text"]:focus,
+        .feedback-section input[type="email"]:focus,
+        .feedback-section textarea:focus,
+        .feedback-section select:focus {
+            border-color: #00d9ff;
+            box-shadow: 0 0 8px #00d9ff;
+            outline: none;
+            background-color: #192334;
+        }
+
+        .feedback-section button[type="submit"] {
+            background-color: #00d9ff;
+            color: #0a0a0a;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            user-select: none;
+            box-shadow: 0 0 12px #00d9ffaa;
+        }
+
+        .feedback-section button[type="submit"]:hover {
+            background-color: #00a9c9;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px #00a9c9cc;
+        }
+
+        .feedback-field .alert {
+            color: #ff6b6b;
+            text-shadow: 0 0 6px #ff6b6b, 0 0 16px #ff6b6b;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            display: none;
+            font-weight: 600;
+        }
+
+        body.light-mode .feedback-field .alert {
+            color: #e53935;
+            text-shadow: 0 0 6px #ffbdbd;
+        }
+
+        footer {
+            background: #1c2533;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 20px;
+            user-select: none;
+        }
+
+        footer .social-icons {
+            margin: 20px 0;
+        }
+
+        footer .social-icons a {
+            margin: 0 10px;
+            color: #e3e8f5;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
+            color: #00d9ff;
+        }
+
+        body.light-mode footer {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        body.light-mode footer .social-icons a {
+            color: #555;
+        }
+
+        body.light-mode footer .social-icons a:hover {
+            color: #00a9c9;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="container">
-    <h2>Register to Vote</h2>
-    <form id="registrationForm" autocomplete="on">
-      <div class="form-group">
-        <span class="material-icons form-icon">person</span>
-        <input type="text" name="name" placeholder="Full Name" required autocomplete="name" id="name">
-        <label class="floating-label" for="name">Full Name</label>
-      </div>
-      <div class="form-group">
-        <span class="material-icons form-icon">location_city</span>
-        <input type="text" name="city" placeholder="City" required autocomplete="address-level2" id="city">
-        <label class="floating-label" for="city">City</label>
-      </div>
-      <div class="form-group">
-        <span class="material-icons form-icon">public</span>
-        <input type="text" name="state" placeholder="State" required autocomplete="address-level1" id="state">
-        <label class="floating-label" for="state">State</label>
-      </div>
-      <div class="form-group">
-        <span class="material-icons form-icon">credit_card</span>
-        <input type="text" name="aadhar" placeholder="Aadhar Number" required autocomplete="off" id="aadhar"
-          pattern="[2-9][0-9]{11}" title="Aadhar number must be 12 digits and must not start with 0 or 1">
-        <label class="floating-label" for="aadhar">Aadhar Number</label>
-      </div>
-      <button type="submit">Register</button>
-    </form>
-  </div>
+    <nav class="navbar" role="navigation" aria-label="Primary Navigation">
+        <div class="nav-container">
+            <div class="logo-area">
+                <div style="display: flex; align-items: center;">
+                    <!-- Large Voting SVG Logo -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"
+                        aria-hidden="true" style="margin-right:16px; flex-shrink:0;">
+                        <rect x="8" y="24" width="48" height="28" rx="6" fill="#a66cff" stroke="#00ffff"
+                            stroke-width="2" />
+                        <rect x="18" y="8" width="28" height="18" rx="4" fill="#fff" stroke="#a66cff"
+                            stroke-width="2" />
+                        <path d="M26 18l6 6 10-10" fill="none" stroke="#00d09c" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <rect x="24" y="32" width="16" height="4" rx="2" fill="#fff" opacity="0.7" />
+                        <circle cx="32" cy="38" r="2" fill="#00ffff" />
+                        <circle cx="40" cy="38" r="2" fill="#00ffff" />
+                        <circle cx="24" cy="38" r="2" fill="#00ffff" />
+                    </svg>
+                    <div>
+                        <div class="logo" style="font-size:2.2rem;">Alocracy</div>
+                        <div class="slogan" style="font-size:1.05rem; color:#9ee2ff; margin-top:2px;">where AI meets
+                            democracy</div>
+                    </div>
+                </div>
+            </div>
 
-  <script>
-    document.getElementById('registrationForm').onsubmit = function (event) {
-      event.preventDefault();
 
-      const aadhar = document.getElementById('aadhar').value.trim();
-      const aadharPattern = /^[2-9][0-9]{11}$/;
+            <ul class="nav-links" role="menubar">
+                <li role="none"><a href="#home" role="menuitem" tabindex="0">Home</a></li>
+                <li role="none"><a href="#features" role="menuitem" tabindex="0">Features</a></li>
+                <li role="none"><a href="#testimonials" role="menuitem" tabindex="0">Testimonials</a></li>
+                <li role="none"><a href="#contact" role="menuitem" tabindex="0">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-      if (!aadharPattern.test(aadhar)) {
-        alert("Please enter a valid Aadhar number:\n- 12 digits only\n- Cannot start with 0 or 1.");
-        return false;
-      }
+    <section class="hero-section" id="home">
+        <h2>Empowering Democracy, One Vote at a Time</h2>
+        <p>Secure, Transparent, and Accessible Online Voting Solution.</p>
+        <button class="cta-btn" type="button">Get Started</button>
+    </section>
 
-      // If valid, send form
-      fetch('save.php', {
-        method: 'POST',
-        body: new FormData(this)
-      })
-        .then(response => response.text())
-        .then(data => {
-          window.location.href = 'send_otp.php';
-        })
-        .catch(error => {
-          console.error('Error:', error);
+    <section class="features-section" id="features">
+        <h2>Why Choose Our System?</h2>
+        <div class="features">
+            <div class="feature-box">
+                <i class="fas fa-lock icon" aria-hidden="true"></i>
+                <h3>Secure</h3>
+                <p>Industry-leading encryption ensures your vote remains private and tamper-proof.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-eye icon" aria-hidden="true"></i>
+                <h3>Transparent</h3>
+                <p>Real-time tracking for election results with full transparency.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-universal-access icon" aria-hidden="true"></i>
+                <h3>Accessible</h3>
+                <p>Easy-to-use interface that works on any device, anytime, anywhere.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="slider-container" aria-label="Image slider">
+        <div class="slider">
+            <img src="imgslo.png" alt="Image 1" />
+            <img src="imgsa.png" alt="Image 2" />
+            <img src="imgpledge.png" alt="Image 3" />
+            <img src="imgind.png" alt="Image 4" />
+            <img src="img.png" alt="Image 5" />
+        </div>
+    </div>
+
+    <section class="testimonials-section" id="testimonials">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial" role="article" aria-label="Testimonial from John Doe">
+            <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="John Doe" class="testimonial-pic" />
+            <div>
+                <p>"This online voting system made our election process seamless and secure."</p>
+                <span>- John Doe, Election Organizer</span>
+                <div class="rating" aria-label="Rating: 5 stars">★★★★★</div>
+            </div>
+        </div>
+        <div class="testimonial" role="article" aria-label="Testimonial from Jane Smith">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Jane Smith" class="testimonial-pic" />
+            <div>
+                <p>"I could cast my vote from the comfort of my home with full confidence in its security."</p>
+                <span>- Jane Smith, Voter</span>
+                <div class="rating" aria-label="Rating: 4 stars">★★★★☆</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feedback-section" id="contact" aria-labelledby="feedback-heading">
+        <h2 id="feedback-heading">We Value Your Feedback</h2>
+        <p>Let us know how we can improve or what you loved about our system!</p>
+        <form id="feedbackForm" action="/submit-feedback" method="post" novalidate>
+            <div class="feedback-field">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" aria-describedby="name-error"
+                    required />
+                <div class="alert" id="name-error" role="alert">Please fill in your name.</div>
+            </div>
+            <div class="feedback-field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" aria-describedby="email-error"
+                    required />
+                <div class="alert" id="email-error" role="alert">Please fill in your email.</div>
+            </div>
+            <div class="feedback-field">
+                <label for="feedback">Feedback:</label>
+                <textarea id="feedback" name="feedback" rows="4" placeholder="Your Feedback"
+                    aria-describedby="feedback-error" required></textarea>
+                <div class="alert" id="feedback-error" role="alert">Please fill in your feedback.</div>
+            </div>
+            <div class="feedback-field">
+                <label for="rating">Rate Us:</label>
+                <select id="rating" name="rating" aria-describedby="rating-error" required>
+                    <option value="">Select</option>
+                    <option value="5">★★★★★ - Excellent</option>
+                    <option value="4">★★★★☆ - Very Good</option>
+                    <option value="3">★★★☆☆ - Average</option>
+                    <option value="2">★★☆☆☆ - Poor</option>
+                    <option value="1">★☆☆☆☆ - Very Bad</option>
+                </select>
+                <div class="alert" id="rating-error" role="alert">Please select a rating.</div>
+            </div>
+            <div style="text-align: center;">
+                <button type="submit">Submit Feedback</button>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Online Voting System. All rights reserved.</p>
+            <p>Alocracy is an AI-powered online voting platform designed to ensure security, transparency, and
+                accessibility for all users. Our advanced encryption technology and real-time tracking make the voting
+                process seamless and trustworthy. With Alocracy, every vote counts, and every voice is heard.</p>
+            <p>Follow us on:</p>
+            <div class="social-icons" role="list">
+                <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" role="listitem"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" role="listitem"><i
+                        class="fab fa-facebook"></i></a>
+                <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" role="listitem"><i
+                        class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn" role="listitem"><i
+                        class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <script>
+        const form = document.getElementById('feedbackForm');
+        form.addEventListener('submit', function (event) {
+            let valid = true;
+
+            form.querySelectorAll('.alert').forEach(alert => alert.style.display = 'none');
+
+            const nameInput = form.querySelector('#name');
+            if (!nameInput.value.trim()) {
+                form.querySelector('#name-error').style.display = 'block';
+                valid = false;
+            }
+
+            const emailInput = form.querySelector('#email');
+            if (!emailInput.value.trim()) {
+                form.querySelector('#email-error').style.display = 'block';
+                valid = false;
+            }
+
+            const feedbackInput = form.querySelector('#feedback');
+            if (!feedbackInput.value.trim()) {
+                form.querySelector('#feedback-error').style.display = 'block';
+                valid = false;
+            }
+
+            const ratingInput = form.querySelector('#rating');
+            if (!ratingInput.value) {
+                form.querySelector('#rating-error').style.display = 'block';
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault();
+                const firstError = form.querySelector('.alert[style*="block"]');
+                if (firstError) {
+                    firstError.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
         });
-    };
-  </script>
+
+        document.querySelector('.cta-btn').addEventListener('click', function () {
+            const msg = new SpeechSynthesisUtterance("Let's get started....  Loading the next page.");
+            msg.onend = function () {
+                window.location.href = "page.html";
+            };
+            window.speechSynthesis.speak(msg);
+        });
+    </script>
+    <script>
+        (function () { if (!window.chatbase || window.chatbase("getState") !== "initialized") { window.chatbase = (...arguments) => { if (!window.chatbase.q) { window.chatbase.q = [] } window.chatbase.q.push(arguments) }; window.chatbase = new Proxy(window.chatbase, { get(target, prop) { if (prop === "q") { return target.q } return (...args) => target(prop, ...args) } }) } const onLoad = function () { const script = document.createElement("script"); script.src = "https://www.chatbase.co/embed.min.js"; script.id = "LWeNHkcRUT8ToRDvsG0VY"; script.domain = "www.chatbase.co"; document.body.appendChild(script) }; if (document.readyState === "complete") { onLoad() } else { window.addEventListener("load", onLoad) } })();
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,1 @@
+{"verified": true, "distance": 0.4863266077423126}

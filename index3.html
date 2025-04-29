@@ -257,6 +257,14 @@ p#auth-status {
     max-width: 95vw;
   }
 }
+.g-recaptcha {
+  filter: invert(1);             
+  transform: scale(1.05);         
+  margin: 70px 0;                
+  border-radius: 8px;             
+}
+
+
   </style>
 </head>
 <body>
@@ -270,9 +278,10 @@ p#auth-status {
       <span class="section-icon">🪪</span>
       <h2>Upload Voter ID</h2>
       <div class="input-box">
-        <input type="file" id="voterIDUpload" />
+        <input type="file" id="voterIDUpload" disabled/>
       </div>
-      <button id="uploadBtn">Upload</button>
+      <button id="uploadBtn" disabled>Upload</button>
+      <div id="recaptcha" class="g-recaptcha" data-sitekey="6LeefigrAAAAACp3APl5R7r9hZCjaSbzWJtxcK7m" data-callback="enableUploadButton"></div>
       <p id="uploadStatus"></p>
     </div>
     <div class="auth-section">
@@ -284,7 +293,34 @@ p#auth-status {
       <button id="proceedBtn">Proceed to Voting</button>
     </div>
   </div>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="script.js"></script>
+  <script>
+    var uploadBtn = document.getElementById('uploadBtn');
+    var voterIDUpload = document.getElementById('voterIDUpload');
+  
+       function enableUploadButton() {
+      var recaptchaResponseValue = grecaptcha.getResponse();
+      if (recaptchaResponseValue.length > 0) {
+        uploadBtn.disabled = false;
+        voterIDUpload.disabled = false;
+      } else {
+        uploadBtn.disabled = true;
+        voterIDUpload.disabled = true;
+      }
+    }
+  
+    uploadBtn.addEventListener('click', function () {
+      var recaptchaResponseValue = grecaptcha.getResponse();
+      if (recaptchaResponseValue.length === 0) {
+        alert("Please complete the reCAPTCHA.");
+        return;
+      }
+  
+      document.getElementById('uploadForm').submit(); 
+    });
+  </script>
+  
 </body>
 </html> 
 

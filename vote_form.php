@@ -50,8 +50,9 @@ h2 {
   margin-bottom: 20px;
 }
 
+
 .party-btn button {
-  padding: 15px;
+  padding: 8px;
   font-size: 16px;
   font-weight: bold;
   border: none;
@@ -61,6 +62,11 @@ h2 {
   box-shadow: 0 2px 12px #00d9ff33;
   letter-spacing: 1px;
   outline: none;
+  width: 100%;        /* Make buttons full width of parent */
+  height: 60px;       /* Fixed height for consistency */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .party-btn button:hover {

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voter Education Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        #chatbox { border: 1px solid #ccc; padding: 10px; width: 500px; height: 400px; overflow-y: scroll; margin-bottom: 10px; }
+        #userInput { width: 400px; padding: 10px; }
+        #sendBtn { padding: 10px 20px; }
+        .user { color: blue; }
+        .bot { color: green; }
+    </style>
+</head>
+<body>
+
+<h2>Voter Education Chatbot</h2>
+
+<div id="chatbox"></div>
+
+<input type="text" id="userInput" placeholder="Ask about voters, cities, states...">
+<button id="sendBtn">Send</button>
+
+<script>
+const chatbox = document.getElementById('chatbox');
+const userInput = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendBtn');
+
+sendBtn.addEventListener('click', async () => {
+    const message = userInput.value;
+    if (!message.trim()) return;
+
+    // Display user message
+    chatbox.innerHTML += `<div class="user"><b>You:</b> ${message}</div>`;
+
+    // Send message to backend
+    const response = await fetch('/get_response', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ message: message })
+    });
+    
+    const data = await response.json();
+
+    // Display bot response
+    chatbox.innerHTML += `<div class="bot"><b>Bot:</b> ${data.response.replace(/\n/g, "<br>")}</div>`;
+    chatbox.scrollTop = chatbox.scrollHeight;
+
+    userInput.value = '';
+});
+</script>
+
+</body>
+</html>

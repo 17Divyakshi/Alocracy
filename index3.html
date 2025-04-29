@@ -257,6 +257,14 @@ p#auth-status {
     max-width: 95vw;
   }
 }
+.g-recaptcha {
+  filter: invert(1);             
+  transform: scale(1.05);         
+  margin: 70px 0;                
+  border-radius: 8px;             
+}
+
+
   </style>
 </head>
 <body>
@@ -291,8 +299,7 @@ p#auth-status {
     var uploadBtn = document.getElementById('uploadBtn');
     var voterIDUpload = document.getElementById('voterIDUpload');
   
-    // Called when reCAPTCHA is solved
-    function enableUploadButton() {
+       function enableUploadButton() {
       var recaptchaResponseValue = grecaptcha.getResponse();
       if (recaptchaResponseValue.length > 0) {
         uploadBtn.disabled = false;
@@ -303,7 +310,6 @@ p#auth-status {
       }
     }
   
-    // Upload button manually submits the form
     uploadBtn.addEventListener('click', function () {
       var recaptchaResponseValue = grecaptcha.getResponse();
       if (recaptchaResponseValue.length === 0) {
@@ -311,7 +317,7 @@ p#auth-status {
         return;
       }
   
-      document.getElementById('uploadForm').submit(); // Manually submit form
+      document.getElementById('uploadForm').submit(); 
     });
   </script>
   

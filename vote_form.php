@@ -50,7 +50,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-
 .party-btn button {
   padding: 8px;
   font-size: 16px;
@@ -62,12 +61,13 @@ h2 {
   box-shadow: 0 2px 12px #00d9ff33;
   letter-spacing: 1px;
   outline: none;
-  width: 100%;        /* Make buttons full width of parent */
-  height: 60px;       /* Fixed height for consistency */
+  width: 100%;        
+  height: 60px;       
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 
 .party-btn button:hover {
   transform: scale(1.05);
@@ -75,25 +75,25 @@ h2 {
 }
 
 .bjp {
-  background: linear-gradient(90deg, #ff9933 60%, #ffe29f 100%);
+  background: linear-gradient(90deg, #d97410) ;
   color: #232946;
   text-shadow: 0 1px 6px #fff2;
 }
 
 .congress {
-  background: linear-gradient(90deg, #138808 60%, #28e1a7 100%);
+  background: linear-gradient(90deg, #12a005 );
   color: #e3e8f5;
   text-shadow: 0 1px 4px #00d9ff44;
 }
 
 .aap {
-  background: linear-gradient(90deg, #1e90ff 60%, #00d9ff 100%);
+  background: linear-gradient(90deg, #0e65bc );
   color: #fff;
   text-shadow: 0 1px 4px #8268ff44;
 }
 
 .others {
-  background: linear-gradient(90deg, #555 60%, #8268ff 100%);
+  background: linear-gradient(90deg, #555 );
   color: #fff;
   text-shadow: 0 1px 4px #00d9ff44;
 }

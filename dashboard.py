@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify
 import csv
 from collections import Counter
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -15,6 +16,8 @@ def get_data():
     unique_voters = set()
     vote_data = []
     number_to_location = {}
+    age_groups = Counter()
+
 
     # --- Step 1: Read voters.csv (to map Number -> State and City) ---
     try:
@@ -24,6 +27,8 @@ def get_data():
                 number = row.get('Number', '').strip()
                 state = row.get('State', '').strip().title()
                 city = row.get('City', '').strip().title()
+                dob = row.get('DOB', '').strip()
+
 
                 if number:
                     if number not in number_to_location:
@@ -37,6 +42,24 @@ def get_data():
                             state_counts[state] += 1
                         if city:
                             city_counts[city] += 1
+                    dob = row.get('DOB','').strip()
+                    if dob:
+                        try:
+                            birth_date = datetime.strptime(dob,"%Y-%m-%d")
+                            age =(datetime.now() - birth_date).days//365
+                            print(f"Number: {number}, DOB: {dob}, Age: {age}") 
+                            if age < 18:
+                              age_groups['Under 18'] += 1
+                            elif age < 30:
+                              age_groups['18-29'] += 1
+                            elif age < 45:
+                              age_groups['30-44'] += 1
+                            elif age < 60:
+                              age_groups['45-59'] += 1
+                            else:
+                              age_groups['60+'] += 1
+                        except ValueError:
+                            pass
 
     except Exception as e:
         print("Error reading voters.csv:", e)
@@ -107,6 +130,8 @@ def get_data():
         'state_counts': dict(state_counts),
         'city_counts': dict(city_counts),
         'party_counts': dict(party_counts),
+         'age_groups': dict(age_groups),
+
         'insights': insights
     })
 

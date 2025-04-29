@@ -14,50 +14,64 @@ def get_data():
     city_counts = Counter()
     unique_voters = set()
     vote_data = []
+    number_to_location = {}
 
-    # --- Read from voters.csv ---
+    # --- Step 1: Read voters.csv (to map Number -> State and City) ---
     try:
         with open('voters.csv', 'r', encoding='utf-8') as file:
             reader = csv.DictReader(file)
             for row in reader:
+                number = row.get('Number', '').strip()
                 state = row.get('State', '').strip().title()
                 city = row.get('City', '').strip().title()
-                number = row.get('Number', '').strip()
 
                 if number:
-                    unique_voters.add(number)
-                if state:
-                    state_counts[state] += 1
-                if city:
-                    city_counts[city] += 1
+                    if number not in number_to_location:
+                        number_to_location[number] = {
+                            'State': state,
+                            'City': city
+                        }
+                    if number not in unique_voters:
+                        unique_voters.add(number)
+                        if state:
+                            state_counts[state] += 1
+                        if city:
+                            city_counts[city] += 1
+
     except Exception as e:
         print("Error reading voters.csv:", e)
 
-    # --- Read from votes.csv ---
+    # --- Step 2: Read votes.csv ---
     party_counts = Counter()
     total_votes = 0
     try:
         with open('votes.csv', 'r', encoding='utf-8') as file:
             reader = csv.DictReader(file)
             for row in reader:
+                number = row.get('Number', '').strip()
                 party = row.get('Party', '').strip().upper()
-                state = row.get('State', '').strip().title()
 
-                row['Party'] = party
-                row['State'] = state
-                vote_data.append(row)
-
-                if party:
+                if number and party:
                     party_counts[party] += 1
                     total_votes += 1
+
+                    # Find state using voter's number
+                    location = number_to_location.get(number, {})
+                    state = location.get('State', '')
+
+                    vote_data.append({
+                        'Party': party,
+                        'State': state
+                    })
+
     except Exception as e:
         print("Error reading votes.csv:", e)
 
-    # --- 🧠 Generate Insights ---
+    # --- Step 3: Generate Insights ---
     insights = []
 
-    # 1. Leading party across states
-    state_party_map = {}  # state -> party counter
+    # Leading party across states
+    state_party_map = {}
     for row in vote_data:
         state = row.get('State')
         party = row.get('Party')
@@ -69,30 +83,24 @@ def get_data():
     party_leads = Counter()
     for state, counter in state_party_map.items():
         if counter:
-            top_party = counter.most_common(1)[0][0]
-            party_leads[top_party] += 1
+            top_party = counter.most_common(1)[0]
+            party_leads[top_party[0]] += 1
 
     if party_leads:
         leading_party, lead_count = party_leads.most_common(1)[0]
-        insights.append(f"{leading_party} is leading in {lead_count} states.")
+        insights.append(f"{leading_party} is leading in {lead_count} state.")
 
-    # 2. Leading party overall 🆕
-    if party_counts:
-        overall_leading_party, overall_votes = party_counts.most_common(1)[0]
-        insights.append(f"Leading party overall is {overall_leading_party} ({overall_votes} votes).")
-
-    # 3. City with most votes
+    # City with most votes
     if city_counts:
         top_city, top_votes = city_counts.most_common(1)[0]
         insights.append(f"Most votes are coming from {top_city} ({top_votes} votes).")
 
-    # 4. Fallback if no insights found
+    # Fallback if no insights
     if not insights:
         insights.append("Waiting for more votes to generate insights.")
 
     print("Insights Sent to Frontend:", insights)
 
-    # --- JSON Response ---
     return jsonify({
         'total_votes': total_votes,
         'unique_voters': len(unique_voters),
@@ -104,6 +112,12 @@ def get_data():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+
+
 
 
 

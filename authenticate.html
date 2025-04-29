@@ -6,90 +6,87 @@
   <title>Voter Authentication</title>
   <style>
     body {
-      background: #0a0f1a;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(120deg, #0f0c29, #24243e, #302b63);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      color: #e3e8f5;
+      font-family: 'Poppins', sans-serif;
     }
 
     .container {
-      background: #121829;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 0 8px #66e5ff;
+      background: rgba(26, 26, 46, 0.9);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
       text-align: center;
-      width: 350px;
-      border: 2px solid #66e5ff;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      width: 340px;
     }
 
-    h2 {
-      margin-bottom: 20px;
-      color: #66e5ff;
-      text-shadow: 0 0 6px #66e5ff;
-      font-family: 'Orbitron', sans-serif;
+    .container h2 {
+      color: #00d9ff;
+      margin-bottom: 30px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-shadow: 0 1px 6px rgba(0, 255, 255, 0.2);
     }
 
-    input[type="text"] {
-      width: 95%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 1px solid #66e5ff;
-      border-radius: 10px;
-      background: #0f1624;
-      color: #e3e8f5;
-      font-size: 16px;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    input[type="text"]:focus {
-      border-color: #66e5ff;
-      box-shadow: 0 0 6px #66e5ff;
-      outline: none;
-      background: #192334;
-    }
-
-    input[type="text"]::placeholder {
-      color: #a3d7ff;
-    }
-
-    button {
-      background-color: #66e5ff;
-      color: #0a0f1a;
+    .container input[type="text"],
+    .container button {
+      width: 100%;
+      padding: 15px 2px;
+      margin: 10px 5px;
+      margin-bottom: 25px;
       border: none;
-      padding: 12px 30px;
-      font-size: 16px;
-      border-radius: 8px;
+      outline: none;
+      border-radius: 10px;
+      background: #1a1a2e;
+      color: white;
+      font-size: 17px;
+      box-shadow: 0 0 5px rgba(0, 255, 255, 0.1);
+      transition: 0.3s;
+    }
+
+    .container input[type="text"]:focus {
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    }
+
+    .container button {
+      background: linear-gradient(90deg, #00d9ff, #7f5af0);
+      color: #000;
+      font-weight: 600;
+      letter-spacing: 1px;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 10px #66e5ff88;
-      font-weight: bold;
     }
 
-    button:hover {
-      background-color: #4dcde5;
-      transform: translateY(-2px);
-      box-shadow: 0 0 12px #4dcde588, 0 0 18px #66e5ff99;
+    .container button:hover {
+      background: linear-gradient(90deg, #7f5af0, #00d9ff);
+      box-shadow: 0 4px 12px rgba(166, 108, 255, 0.3);
     }
-</style>
 
+    .note {
+      color: #00d9ff;
+      font-size: 14px;
+      margin-bottom: 20px;
+      text-shadow: 0 1px 5px rgba(0, 255, 255, 0.3);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+  </style>
 </head>
 
 <body>
   <div class="container">
     <h2>Voter Authentication</h2>
+    <p class="note">Note: Your Aadhar will be securely verified.</p>
     <form action="authentication.php" method="POST">
       <input type="text" name="aadhar" placeholder="Enter Aadhar Number" required>
       <button type="submit">Authenticate</button>
     </form>
   </div>
-  <script>
-    (function () { if (!window.chatbase || window.chatbase("getState") !== "initialized") { window.chatbase = (...arguments) => { if (!window.chatbase.q) { window.chatbase.q = [] } window.chatbase.q.push(arguments) }; window.chatbase = new Proxy(window.chatbase, { get(target, prop) { if (prop === "q") { return target.q } return (...args) => target(prop, ...args) } }) } const onLoad = function () { const script = document.createElement("script"); script.src = "https://www.chatbase.co/embed.min.js"; script.id = "LWeNHkcRUT8ToRDvsG0VY"; script.domain = "www.chatbase.co"; document.body.appendChild(script) }; if (document.readyState === "complete") { onLoad() } else { window.addEventListener("load", onLoad) } })();
-  </script>
 </body>
 
 </html>

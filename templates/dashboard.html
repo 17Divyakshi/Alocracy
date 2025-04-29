@@ -572,13 +572,6 @@
             <canvas id="cityChart"></canvas>
         </div>
 
-        <div class="chart-card">
-            <h3><i class="fas fa-city"></i> Age Group Distribution</h3>
-            <canvas id="ageChart"></canvas>
-        </div>
-
-        
-
         <div class="chart-card" id="partyChartCard">
             <h3><i class="fas fa-chart-pie"></i> Vote Share by Party</h3>
             <canvas id="partyChart"></canvas>
@@ -617,7 +610,7 @@
         });
 
 
-        let stateChart, cityChart, partyChart,ageData;
+        let stateChart, cityChart, partyChart;
 
         async function fetchData() {
             const res = await fetch('/data');
@@ -725,18 +718,6 @@
                     }
                 }
             });
-            const ageData = data.age_groups;
-new Chart(document.getElementById("ageChart"), {
-  type: 'doughnut',
-  data: {
-    labels: Object.keys(ageData),
-    datasets: [{
-      data: Object.values(ageData),
-      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#66BB6A']
-    }]
-  }
-});
-
 
             const partyLabels = Object.keys(data.party_counts);
             const partyData = Object.values(data.party_counts);

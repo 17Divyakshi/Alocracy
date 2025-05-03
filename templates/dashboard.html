@@ -621,10 +621,10 @@
 
             // Update party vote boxes
             document.getElementById('bjpBox').innerText = `BJP: ${data.party_counts.BJP || 0}`;
-            document.getElementById('congressBox').innerText = `CONGRESS: ${data.party_counts.Congress || 0}`;
+            document.getElementById('congressBox').innerText = `CONGRESS: ${data.party_counts.CONGRESS || 0}`;
             document.getElementById('aapBox').innerText = `AAP: ${data.party_counts.AAP || 0}`;
 
-            const totalKnown = (data.party_counts.BJP || 0) + (data.party_counts.Congress || 0) + (data.party_counts.AAP || 0);
+            const totalKnown = (data.party_counts.BJP || 0) + (data.party_counts.CONGRESS || 0) + (data.party_counts.AAP || 0);
             const others = data.total_votes - totalKnown;
             document.getElementById('othersBox').innerText = `Others: ${others}`;
 

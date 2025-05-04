@@ -152,7 +152,8 @@
         </div>
         <div class="card" onclick="openDashboard()">
             <img src="https://img.icons8.com/ios-filled/100/000000/graph.png" alt="Dashboard Icon">
-            <h3>Dashboard</h3>
+            <a href="start_dashboard.php" target="_blank"></a>
+<h3>Dashboard</h3></a>
             <p>View vote analysis and insights</p>
         </div>
         <div class="card vote-card" onclick="voteNow()">
@@ -162,7 +163,8 @@
         </div>
         <div class="card" onclick="openAIBot()">
             <img src="https://img.icons8.com/ios-filled/100/artificial-intelligence.png" alt="AI Bot Icon">
-            <h3>Ballot Brain</h3>
+            <a href="start_ballotbrain.php" target="_blank">
+<h3>Ballot Brain</h3></a>
             <p>Your Election Assistant</p>
         </div>
     </div>
@@ -200,7 +202,7 @@
 
         function openDashboard() {
             speak("Accessing Dashboard");
-            window.location.href = "templates/dashboard.html";
+            window.location.href = "http://127.0.0.1:5000/";
         }
 
         function openAIBot() {

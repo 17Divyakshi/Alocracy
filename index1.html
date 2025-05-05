@@ -192,6 +192,7 @@
     document.getElementById('registrationForm').onsubmit = function (event) {
       const aadhar = document.getElementById('aadhar').value.trim();
       const aadharPattern = /^[2-9][0-9]{11}$/;
+      const dob = document.getElementById('dob').value;
 
       if (!aadharPattern.test(aadhar)) {
         alert("Please enter a valid Aadhar number:\n- 12 digits only\n- Cannot start with 0 or 1.");
@@ -199,7 +200,19 @@
         return false;
       }
 
-     // If valid, the form will submit to save.php
+      const dobDate = new Date(dob);
+            const today = new Date();
+            const ageDiff = today.getFullYear() - dobDate.getFullYear();
+            const m = today.getMonth() - dobDate.getMonth();
+            const d = today.getDate() - dobDate.getDate();
+            const isUnder18 = ageDiff < 18 || (ageDiff === 18 && (m < 0 || (m === 0 && d < 0)));
+
+            if (isUnder18) {
+                alert("You must be at least 18 years old to register.");
+                event.preventDefault();
+                return false;
+            }
+
     };
   </script>
 </body>

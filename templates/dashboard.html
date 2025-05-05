@@ -4,78 +4,288 @@
 <head>
     <title>Live Voting Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #00d9ff;
+            --secondary-color: #1763c7;
+            --bg-dark: #101522;
+            --bg-card: rgba(35, 36, 58, 0.95);
+            --text-light: #e3e8f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Poppins', 'Roboto', sans-serif;
-            background: linear-gradient(120deg, #101522, #2c3e50, #1f2b38);
-            /* Updated gradient based on first theme */
-            color: #e3e8f5;
-            /* Light text color similar to the first theme */
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, var(--bg-dark), #2c3e50, #1f2b38);
+            color: var(--text-light);
             margin: 0;
             padding: 20px;
             min-height: 100vh;
         }
 
-        h1 {
+        .header {
             text-align: center;
-            margin-bottom: 30px;
-            color: #00d9ff;
-            /* Changed heading color to match first theme */
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h1 {
+            color: var(--primary-color);
             text-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
-            /* Lighten the glow with theme color */
             font-weight: 700;
             letter-spacing: 0.8px;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(0, 217, 255, 0.6), 0 0 30px rgba(0, 217, 255, 0.4);
+            }
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            opacity: 0.8;
+            font-size: 1.1rem;
         }
 
         .summary {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
         }
 
         .box {
-            padding: 20px 25px;
-            border-radius: 12px;
-            background: rgba(35, 36, 58, 0.95);
-            box-shadow: 0 2px 8px rgba(0, 255, 255, 0.1), 0 4px 12px rgba(130, 104, 255, 0.1);
-            /* Updated shadow */
+            padding: 25px 30px;
+            border-radius: 16px;
+            background: var(--bg-card);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.1), 0 6px 18px rgba(130, 104, 255, 0.1);
             text-align: center;
-            width: 180px;
-            font-size: 16px;
+            width: 200px;
+            font-size: 18px;
             font-weight: 600;
-            color: #e3e8f5;
-            /* Light text color */
-            transition: transform 0.3s, box-shadow 0.3s;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .box:hover::before {
+            left: 100%;
         }
 
         .box:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.15), 0 6px 18px rgba(130, 104, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.15), 0 10px 30px rgba(130, 104, 255, 0.15);
         }
 
-        .bjp {
-            background: rgba(255, 204, 0, 0.85);
-            color: #1a1a1a;
+        .bjp { background: rgba(255, 204, 0, 0.85); color: #1a1a1a; }
+        .congress { background: rgba(30, 144, 255, 0.85); }
+        .aap { background: rgba(0, 188, 212, 0.85); }
+        .others { background: rgba(142, 68, 173, 0.85); }
+
+        .stats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 40px;
+            width: 100%;
         }
 
-        .congress {
-            background: rgba(30, 144, 255, 0.85);
-            color: #e3e8f5;
-            /* Light text color */
+        .party-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            width: 100%;
         }
 
-        .aap {
-            background: rgba(0, 188, 212, 0.85);
-            color: #e3e8f5;
-            /* Light text color */
+        .center-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .others {
-            background: rgba(142, 68, 173, 0.85);
-            color: #e3e8f5;
-            /* Light text color */
+        .battleground-states, .voter-demographics {
+            flex: 1;
+            min-width: 400px;
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .battleground-states:hover, .voter-demographics:hover {
+            transform: translateY(-5px);
+        }
+
+        .battleground-states h4 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .state-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .state-item {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .state-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .state-item span {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .state-progress {
+            width: 120px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .voter-demographics h4 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .demographic-item {
+            margin-bottom: 20px;
+        }
+
+        .demographic-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .demographic-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .demographic-value {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .demographic-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .demographic-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .real-time-updates {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .update-item {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .update-item:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .stats-container {
+                flex-direction: column;
+            }
+            
+            .main-stats, .side-stats {
+                width: 100%;
+            }
+            
+            .state-progress {
+                width: 100px;
+            }
         }
 
         .charts {
@@ -83,131 +293,294 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
+            margin-top: 40px;
         }
 
         .chart-card {
-            background: rgba(35, 36, 58, 0.95);
-            padding: 20px;
+            background: var(--bg-card);
+            padding: 25px;
             border-radius: 14px;
             box-shadow: 0 4px 15px rgba(0, 255, 255, 0.1), 0 6px 18px rgba(166, 108, 255, 0.1);
-            width:600px;
-            /* Fixed width for consistency */
+            width: 600px;
             height: 400px;
-            /* Fixed height for consistency */
-            max-width: 100%;
-            color: #ffffff;
-            transition: box-shadow 0.3s, transform 0.3s;
+            transition: transform 0.3s ease;
             position: relative;
         }
 
         .chart-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.1), 0 8px 25px rgba(166, 108, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .chart-card h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         canvas {
             width: 100% !important;
-            /* Ensure canvas fills the container */
             height: 100% !important;
-            /* Ensure canvas height is consistent with the container */
-        }
-
-        .donut-card canvas {
-            height: 100% !important;
-            /* Adjust height for donut chart */
         }
 
         #partyChartCard {
             max-width: 600px;
-            /* Fixed width for party chart */
             width: 100%;
             height: 400px;
         }
-        #partyChart{
-            height: 600px;
-            width:100%;
+        #totalVotes.box{
+            width:300px;
+            height:100px;
         }
-        .card {
-            background-color:rgba(35, 36, 58, 0.95);
-            border-radius: 16px;
-            border: 1.5px solid #1763c7;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            padding: 24px;
-            margin-top: 1.5rem;
-            margin-bottom: 40px;
-        }
-        .voting-box {
-            padding: 20px;
-            border-radius: 12px;
-            background: rgba(35, 36, 58, 0.95);
-            box-shadow: 0 2px 8px rgba(0, 255, 255, 0.1), 0 4px 12px rgba(130, 104, 255, 0.1);
-            text-align: center;
-            width: 180px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #e3e8f5;
-            /* Light text color */
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin: 15px;
+        #uniqueVoters.box{
+            width:300px;
+            height:100px;
         }
 
-        .voting-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.15), 0 6px 18px rgba(130, 104, 255, 0.1);
+        #partyChart {
+            height: 100%;
+            width: 100%;
         }
 
         @media (max-width: 768px) {
             .chart-card {
                 width: 100%;
-                height: 300px;
-                /* Adjust height for smaller screens */
+                height: 350px;
             }
-        
- 
-}
+        }
 
-        
-        
+        .insights-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 40px 0;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .insights-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.15), 0 10px 30px rgba(130, 104, 255, 0.15);
+        }
+
+        .insights-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .insights-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .insights-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .insights-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .insight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0, 217, 255, 0.05);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .insight-item:hover {
+            transform: translateX(5px);
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        .insight-icon {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        .insight-text {
+            flex: 1;
+            line-height: 1.5;
+        }
+
+        .loading-insights {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .loading-spinner {
+            width: 25px;
+            height: 25px;
+            border: 3px solid rgba(0, 217, 255, 0.1);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
-    <h1>Live Voting Dashboard</h1>
-    
-
-
-    <div class="summary">
-        <div class="box bjp" id="bjpBox">BJP: 0</div>
-        <div class="box congress" id="congressBox">Congress: 0</div>
-        <div class="box aap" id="aapBox">AAP: 0</div>
-        <div class="box others" id="othersBox">Others: 0</div>
+    <div class="header">
+        <h1>Live Voting Dashboard</h1>
+        <p class="subtitle">Real-time election insights and analytics</p>
     </div>
 
-    <div class="summary">
-        <div class="box" id="totalVotes">Total Votes: 0</div>
-        <div class="box" id="uniqueVoters">Unique Voters: 0</div>
+    <div class="stats-container">
+        <div class="party-stats">
+            <div class="box bjp" id="bjpBox">BJP: 0</div>
+            <div class="box congress" id="congressBox">Congress: 0</div>
+            <div class="box aap" id="aapBox">AAP: 0</div>
+            <div class="box others" id="othersBox">Others: 0</div>
+        </div>
+
+        <div class="party-stats">
+            <div class="box" id="totalVotes">Total Votes: 0</div>
+            <div class="box" id="uniqueVoters">Unique Voters: 0</div>
+        </div>
+
+        <div class="center-stats">
+            <div class="battleground-states">
+                <h4><i class="fas fa-flag"></i> Key Battleground States</h4>
+                <ul class="state-list" id="battlegroundStates">
+                    <li class="state-item">
+                        <span>Uttar Pradesh</span>
+                        <div class="state-progress">
+                            <div class="progress-bar" style="width: 75%"></div>
+                        </div>
+                    </li>
+                    <li class="state-item">
+                        <span>Maharashtra</span>
+                        <div class="state-progress">
+                            <div class="progress-bar" style="width: 65%"></div>
+                        </div>
+                    </li>
+                    <li class="state-item">
+                        <span>West Bengal</span>
+                        <div class="state-progress">
+                            <div class="progress-bar" style="width: 80%"></div>
+                        </div>
+                    </li>
+                    <li class="state-item">
+                        <span>Karnataka</span>
+                        <div class="state-progress">
+                            <div class="progress-bar" style="width: 70%"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="voter-demographics">
+                <h4><i class="fas fa-users"></i> Voter Demographics</h4>
+                <div class="demographic-item">
+                    <div class="demographic-label">
+                        <span>18-25 Years</span>
+                        <span class="demographic-value">32%</span>
+                    </div>
+                    <div class="demographic-bar">
+                        <div class="demographic-fill" style="width: 32%"></div>
+                    </div>
+                </div>
+                <div class="demographic-item">
+                    <div class="demographic-label">
+                        <span>26-40 Years</span>
+                        <span class="demographic-value">45%</span>
+                    </div>
+                    <div class="demographic-bar">
+                        <div class="demographic-fill" style="width: 45%"></div>
+                    </div>
+                </div>
+                <div class="demographic-item">
+                    <div class="demographic-label">
+                        <span>41-60 Years</span>
+                        <span class="demographic-value">18%</span>
+                    </div>
+                    <div class="demographic-bar">
+                        <div class="demographic-fill" style="width: 18%"></div>
+                    </div>
+                </div>
+                <div class="demographic-item">
+                    <div class="demographic-label">
+                        <span>60+ Years</span>
+                        <span class="demographic-value">5%</span>
+                    </div>
+                    <div class="demographic-bar">
+                        <div class="demographic-fill" style="width: 5%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card mt-4">
-        <h5>Insights Summary</h5>
-        <div id="insights">Loading insights...</div> <!-- 👈 This id must match -->
+
+    <div class="insights-card">
+        <div class="insights-header">
+            <div class="insights-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3 class="insights-title">Insights Summary</h3>
+        </div>
+        <div class="insights-content" id="insights">
+            <div class="loading-insights">
+                <div class="loading-spinner"></div>
+                <span>Analyzing voting patterns...</span>
+            </div>
+        </div>
     </div>
+
     <div class="charts">
         <div class="chart-card">
-            <h3 style="text-align:center;">Votes by State</h3>
+            <h3><i class="fas fa-map-marked-alt"></i> Votes by State</h3>
             <canvas id="stateChart"></canvas>
         </div>
 
         <div class="chart-card">
-            <h3 style="text-align:center;">Votes by City</h3>
+            <h3><i class="fas fa-city"></i> Votes by City</h3>
             <canvas id="cityChart"></canvas>
         </div>
 
         <div class="chart-card" id="partyChartCard">
-            <h3 style="text-align:center;">Vote Share by Party</h3>
+            <h3><i class="fas fa-chart-pie"></i> Vote Share by Party</h3>
             <canvas id="partyChart"></canvas>
         </div>
+    </div>
 
-
+    <div class="real-time-updates" id="realTimeUpdates">
+        <h4><i class="fas fa-bell"></i> Real-time Updates</h4>
+        <div class="update-item">System initialized</div>
     </div>
 
     <script>
@@ -218,12 +591,20 @@
                     const insightsBox = document.getElementById("insights");
                     if (insightsBox) {
                         if (data.insights && data.insights.length > 0) {
-                            insightsBox.innerHTML = data.insights.map(i => `💡 ${i}`).join("<br>");
+                            insightsBox.innerHTML = data.insights.map(i => `
+                                <div class="insight-item">
+                                    <i class="fas fa-chart-line insight-icon"></i>
+                                    <div class="insight-text">${i}</div>
+                                </div>
+                            `).join("");
                         } else {
-                            insightsBox.innerHTML = "No insights available yet.";
+                            insightsBox.innerHTML = `
+                                <div class="insight-item">
+                                    <i class="fas fa-info-circle insight-icon"></i>
+                                    <div class="insight-text">No insights available yet.</div>
+                                </div>
+                            `;
                         }
-                    } else {
-                        console.warn("No element with ID 'insights' found!");
                     }
                 });
         });
@@ -240,10 +621,10 @@
 
             // Update party vote boxes
             document.getElementById('bjpBox').innerText = `BJP: ${data.party_counts.BJP || 0}`;
-            document.getElementById('congressBox').innerText = `CONGRESS: ${data.party_counts.Congress || 0}`;
+            document.getElementById('congressBox').innerText = `CONGRESS: ${data.party_counts.CONGRESS || 0}`;
             document.getElementById('aapBox').innerText = `AAP: ${data.party_counts.AAP || 0}`;
 
-            const totalKnown = (data.party_counts.BJP || 0) + (data.party_counts.Congress || 0) + (data.party_counts.AAP || 0);
+            const totalKnown = (data.party_counts.BJP || 0) + (data.party_counts.CONGRESS || 0) + (data.party_counts.AAP || 0);
             const others = data.total_votes - totalKnown;
             document.getElementById('othersBox').innerText = `Others: ${others}`;
 

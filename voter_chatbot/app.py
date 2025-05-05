@@ -14,4 +14,4 @@ def get_bot_response():
     return jsonify({'response': bot_message})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=5001)

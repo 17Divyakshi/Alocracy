@@ -26,10 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = $_POST['name'];
         $city = $_POST['city'];
         $state = $_POST['state'];
+        $dob = $_POST['dob'];
 
         // Save the registration data to a CSV file (voters.csv)
         $file = fopen("voters.csv", "a");
-        fputcsv($file, [$name, $city, $state, $aadhar]);
+        fputcsv($file, [$name, $city, $state, $aadhar,$dob]);
         fclose($file);
 
         // Redirect to OTP verification page (or wherever you want)

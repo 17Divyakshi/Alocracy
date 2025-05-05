@@ -105,11 +105,21 @@
     }
 
     /* Hide the default calendar icon (Chrome/Edge/Safari) */
-    input[type="date"].custom-date-picker::-webkit-calendar-picker-indicator {
+    /* input[type="date"].custom-date-picker::-webkit-calendar-picker-indicator {
       opacity: 0;
       z-index: 2;
       position: relative;
-    }
+    } */
+
+  input[type="date"].custom-date-picker::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
     /* Custom blue calendar icon overlay */
     .form-group.date-group {

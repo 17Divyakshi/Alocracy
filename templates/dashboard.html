@@ -22,7 +22,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(120deg, var(--bg-dark), #2c3e50, #1f2b38);
+            background: linear-gradient(120deg, #0f0c29, #24243e, #302b63);
             color: var(--text-light);
             margin: 0;
             padding: 20px;
@@ -644,14 +644,14 @@
                 },
                 options: {
                     layout: {
-        padding: 45  // 👈 reduce padding inside chart
-    },
+                        padding: 45
+                    },
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             labels: {
-                                color: '#333',
+                                color: '#fff',
                                 font: {
                                     size: 14,
                                     weight: 'bold'
@@ -659,6 +659,24 @@
                             }
                         }
                     },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#fff'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#fff'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    }
                 }
             });
 
@@ -678,14 +696,14 @@
                 },
                 options: {
                     layout: {
-        padding: 45  // 👈 reduce padding inside chart
-    },
+                        padding: 45
+                    },
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             labels: {
-                                color: '#333',
+                                color: '#fff',
                                 font: {
                                     size: 14,
                                     weight: 'bold'
@@ -696,18 +714,18 @@
                     scales: {
                         x: {
                             ticks: {
-                                color: 'rgb(240, 240, 240)'
+                                color: '#fff'
                             },
                             grid: {
-                                color: 'rgba(0,0,0,0.05)'
+                                color: 'rgba(255, 255, 255, 0.1)'
                             }
                         },
                         y: {
                             ticks: {
-                                color: 'rgb(240, 240, 240)'
+                                color: '#fff'
                             },
                             grid: {
-                                color: 'rgba(0,0,0,0.1)'
+                                color: 'rgba(255, 255, 255, 0.1)'
                             }
                         }
                     },
@@ -735,12 +753,18 @@
                 },
                 options: {
                     layout: {
-        padding: 45// 👈 reduce padding inside chart
-    },
+                        padding: 45
+                    },
                     plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff'
+                            }
+                        },
                         title: {
                             display: true,
-                            text: 'Vote Share by Party'
+                            text: 'Vote Share by Party',
+                            color: '#fff'
                         }
                     }
                 }

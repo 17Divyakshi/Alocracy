@@ -104,13 +104,6 @@
       position: relative;
     }
 
-    /* Hide the default calendar icon (Chrome/Edge/Safari) */
-    /* input[type="date"].custom-date-picker::-webkit-calendar-picker-indicator {
-      opacity: 0;
-      z-index: 2;
-      position: relative;
-    } */
-
   input[type="date"].custom-date-picker::-webkit-calendar-picker-indicator {
   opacity: 0;
   cursor: pointer;
@@ -121,7 +114,6 @@
   left: 0;
 }
 
-    /* Custom blue calendar icon overlay */
     .form-group.date-group {
       position: relative;
     }
@@ -225,14 +217,13 @@
       const aadharPattern = /^[2-9][0-9]{11}$/;
       const dob = document.getElementById('dob').value;
 
-      // Validate Aadhar
       if (!aadharPattern.test(aadhar)) {
         alert("Please enter a valid Aadhar number:\n- 12 digits only\n- Cannot start with 0 or 1.");
         event.preventDefault();
         return false;
       }
 
-      // Validate DOB: Must be at least 18 years old as of May 5, 2025
+
       if (!dob) {
         alert("Please enter your Date of Birth.");
         event.preventDefault();
@@ -250,7 +241,6 @@
         event.preventDefault();
         return false;
       }
-      // If valid, the form will submit to save.php
     };
   </script>
 </body>

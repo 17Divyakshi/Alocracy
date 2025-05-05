@@ -5,8 +5,7 @@
   <title>Voter Registration</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=350, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&family=Poppins:wght@400;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     body {
@@ -37,15 +36,8 @@
     }
 
     @keyframes fadeInScale {
-      0% {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
+      0% { opacity: 0; transform: scale(0.9);}
+      100% { opacity: 1; transform: scale(1);}
     }
 
     h2 {
@@ -89,7 +81,7 @@
       top: -12px;
       left: 38px;
       font-size: 0.8em;
-      color: #a66cff;
+      color: #00d9ff;
       background: #1a1a2e;
       padding: 0 6px;
       border-radius: 4px;
@@ -97,9 +89,10 @@
     }
 
     input[type="text"],
-    input[type="number"] {
+    input[type="number"],
+    input[type="date"].custom-date-picker {
       width: 85%;
-      padding: 14px 13px 14px 40px;
+      padding: 14px 40px 14px 40px;
       border: 1.5px solid #303150;
       border-radius: 10px;
       background: #23243a;
@@ -108,16 +101,45 @@
       box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
       outline: none;
       transition: 0.3s;
+      position: relative;
+    }
+
+    /* Hide the default calendar icon (Chrome/Edge/Safari) */
+    input[type="date"].custom-date-picker::-webkit-calendar-picker-indicator {
+      opacity: 0;
+      z-index: 2;
+      position: relative;
+    }
+
+    /* Custom blue calendar icon overlay */
+    .form-group.date-group {
+      position: relative;
+    }
+    .form-group.date-group::after {
+      content: '';
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 22px;
+      height: 22px;
+      pointer-events: none;
+      background: url('data:image/svg+xml;utf8,<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="16" rx="2" fill="%2300d9ff"/><rect x="7" y="9" width="2" height="2" fill="white"/><rect x="11" y="9" width="2" height="2" fill="white"/><rect x="15" y="9" width="2" height="2" fill="white"/><rect x="7" y="13" width="2" height="2" fill="white"/><rect x="11" y="13" width="2" height="2" fill="white"/><rect x="15" y="13" width="2" height="2" fill="white"/><rect x="7" y="17" width="2" height="2" fill="white"/><rect x="11" y="17" width="2" height="2" fill="white"/><rect x="15" y="17" width="2" height="2" fill="white"/></svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
     }
 
     input[type="text"]:focus,
-    input[type="number"]:focus {
+    input[type="number"]:focus,
+    input[type="date"].custom-date-picker:focus {
       border-color: #00d9ff;
       background: #1a1b2d;
     }
 
     input[type="text"]::placeholder,
-    input[type="number"]::placeholder {
+    input[type="number"]::placeholder,
+    input[type="date"].custom-date-picker::placeholder {
       color: transparent;
     }
 
@@ -147,7 +169,6 @@
         padding: 20px 8px;
         width: 95vw;
       }
-
       h2 {
         font-size: 1.4rem;
       }
@@ -179,10 +200,10 @@
           pattern="[2-9][0-9]{11}" title="Aadhar number must be 12 digits and must not start with 0 or 1">
         <label class="floating-label" for="aadhar">Aadhar Number</label>
       </div>
-      <div class="form-group">
-        <span class="material-icons form-icon">location_city</span>
-        <input type="date" name="dob" placeholder="dob" required autocomplete="off" id="dob">
-        <label class="floating-label" for="city">Dob</label>
+      <div class="form-group date-group">
+        <span class="material-icons form-icon">calendar_today</span>
+        <input type="date" class="custom-date-picker" name="dob" placeholder="Date of Birth" required autocomplete="bday" id="dob">
+        <label class="floating-label" for="dob">Date of Birth</label>
       </div>
       <button type="submit">Register</button>
     </form>
@@ -194,26 +215,33 @@
       const aadharPattern = /^[2-9][0-9]{11}$/;
       const dob = document.getElementById('dob').value;
 
+      // Validate Aadhar
       if (!aadharPattern.test(aadhar)) {
         alert("Please enter a valid Aadhar number:\n- 12 digits only\n- Cannot start with 0 or 1.");
         event.preventDefault();
         return false;
       }
 
+      // Validate DOB: Must be at least 18 years old as of May 5, 2025
+      if (!dob) {
+        alert("Please enter your Date of Birth.");
+        event.preventDefault();
+        return false;
+      }
       const dobDate = new Date(dob);
-            const today = new Date();
-            const ageDiff = today.getFullYear() - dobDate.getFullYear();
-            const m = today.getMonth() - dobDate.getMonth();
-            const d = today.getDate() - dobDate.getDate();
-            const isUnder18 = ageDiff < 18 || (ageDiff === 18 && (m < 0 || (m === 0 && d < 0)));
-
-            if (isUnder18) {
-                alert("You must be at least 18 years old to register.");
-                event.preventDefault();
-                return false;
-            }
+      const today = new Date(2025, 4, 5); // Months are 0-indexed: 4 = May
+      let age = today.getFullYear() - dobDate.getFullYear();
+      const m = today.getMonth() - dobDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dobDate.getDate())) {
+        age--;
+      }
+      if (age < 18) {
+        alert("You must be at least 18 years old to register.");
+        event.preventDefault();
+        return false;
+      }
+      // If valid, the form will submit to save.php
     };
-
   </script>
 </body>
 </html>
